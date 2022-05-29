@@ -9,5 +9,75 @@
     <string name="last_name">Last Name</string>
     <string name="birth_date">Birth Date</string>
     <string name="phone_number">Phone Number</string>
-    <string name="password_confirm">Password Confirm</string>
+    <string name="password_confirm">Confirm Password</string>
+    <string name="new_password">New Password</string>
+    <string name="imc">IMC</string>
+    <string name="gender">Gender</string>
+    <string name="change_password">Change Password</string>
+    <string name="action_save">Save</string>
+    <string name="water_total">Total ml per day</string>
+    <string name="water_cup">Total ml per cup</string>
+    <string name="time_wake_up">Time to wake up</string>
+    <string name="time_sleep">Time to sleep</string>
+
+    <string-array name="water_per_day">
+        <item>1000ml</item>
+        <item>1500ml</item>
+        <item>2000ml</item>
+        <item>2500ml</item>
+        <item>3000ml</item>
+        <item>3500ml</item>
+        <item>4000ml</item>
+    </string-array>
+
+    <string-array name="water_per_cup">
+        <item>50ml</item>
+        <item>75ml</item>
+        <item>100ml</item>
+        <item>150ml</item>
+        <item>200ml</item>
+        <item>250ml</item>
+        <item>300ml</item>
+        <item>350ml</item>
+        <item>400ml</item>
+        <item>450ml</item>
+        <item>500ml</item>
+        <item>550ml</item>
+        <item>600ml</item>
+        <item>650ml</item>
+        <item>700ml</item>
+        <item>750ml</item>
+        <item>800ml</item>
+        <item>850ml</item>
+        <item>900ml</item>
+        <item>950ml</item>
+        <item>1000ml</item>
+    </string-array>
+
+    <string-array name="hours">
+        <item>01 AM</item>
+        <item>02 AM</item>
+        <item>03 AM</item>
+        <item>04 AM</item>
+        <item>05 AM</item>
+        <item>06 AM</item>
+        <item>07 AM</item>
+        <item>08 AM</item>
+        <item>09 AM</item>
+        <item>10 AM</item>
+        <item>11 AM</item>
+        <item>12 AM</item>
+        <item>01 PM</item>
+        <item>02 PM</item>
+        <item>03 PM</item>
+        <item>04 PM</item>
+        <item>05 PM</item>
+        <item>06 PM</item>
+        <item>07 PM</item>
+        <item>08 PM</item>
+        <item>09 PM</item>
+        <item>10 PM</item>
+        <item>11 PM</item>
+        <item>12 PM</item>
+    </string-array>
 </resources>

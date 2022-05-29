@@ -18,5 +18,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void clickToSignIn(View view) {
+        Intent intent = new Intent(this, DrinkWater.class);
+        startActivity(intent);
+    }
+
 
 }

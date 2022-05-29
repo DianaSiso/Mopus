@@ -17,7 +17,7 @@
 
 
         <EditText
-            android:id="@+id/register_first_name"
+            android:id="@+id/profile_first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -41,15 +41,15 @@
             android:hint="@string/last_name"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/register_birth_date"
+            app:layout_constraintBottom_toTopOf="@+id/profile_birth_date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_first_name"
+            app:layout_constraintTop_toBottomOf="@+id/profile_first_name"
             tools:ignore="TextContrastCheck" />
 
         <EditText
-            android:id="@+id/register_birth_date"
+            android:id="@+id/profile_birth_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -58,7 +58,7 @@
             android:inputType="date"
             android:minHeight="48dp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/register_phone_number"
+            app:layout_constraintBottom_toTopOf="@+id/profile_phone_number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
             tools:ignore="TextContrastCheck" />
 
         <EditText
-            android:id="@+id/register_phone_number"
+            android:id="@+id/profile_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -74,15 +74,15 @@
             android:hint="@string/phone_number"
             android:inputType="phone"
             android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/register_email"
+            app:layout_constraintBottom_toTopOf="@+id/profile_email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_birth_date"
+            app:layout_constraintTop_toBottomOf="@+id/profile_birth_date"
             tools:ignore="TextContrastCheck" />
 
         <EditText
-            android:id="@+id/register_email"
+            android:id="@+id/profile_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -94,7 +94,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_phone_number" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_phone_number" />
 
         <EditText
             android:id="@+id/register_password"
@@ -110,7 +110,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_email"
+            app:layout_constraintTop_toBottomOf="@+id/profile_email"
             tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
         <EditText
@@ -122,7 +122,7 @@
             android:hint="@string/password_confirm"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/register_button"
+            app:layout_constraintBottom_toTopOf="@+id/change_password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +130,7 @@
             tools:ignore="TextContrastCheck" />
 
         <Button
-            android:id="@+id/register_button"
+            android:id="@+id/change_password"
             android:layout_width="119dp"
             android:layout_height="50dp"
             android:layout_marginTop="50dp"
