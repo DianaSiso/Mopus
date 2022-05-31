@@ -19,6 +19,7 @@
     <string name="water_cup">Total ml per cup</string>
     <string name="time_wake_up">Time to wake up</string>
     <string name="time_sleep">Time to sleep</string>
+    <string name="action_register_menstruation">Register Menstruation</string>
 
     <string-array name="water_per_day">
         <item>1000ml</item>

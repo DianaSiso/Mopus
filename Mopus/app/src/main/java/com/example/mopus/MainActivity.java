@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickToSignIn(View view) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, MenstrualCycle.class);
         startActivity(intent);
     }
 
