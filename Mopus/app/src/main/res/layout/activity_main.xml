@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="#f7f2ea">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="65dp"
@@ -88,5 +88,5 @@
             app:layout_constraintVertical_bias="0.0"
             tools:ignore="TextContrastCheck" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
