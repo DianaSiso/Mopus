@@ -16,134 +16,120 @@
         android:layout_marginTop="35dp">
 
 
-        <EditText
-            android:id="@+id/profile_first_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/first_name"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/profile_last_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TextContrastCheck" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/profile_last_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/last_name"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/profile_birth_date"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_first_name"
-            tools:ignore="TextContrastCheck" />
+            <EditText
+                android:id="@+id/register_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/first_name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                tools:ignore="TextContrastCheck" />
 
-        <EditText
-            android:id="@+id/profile_birth_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/birth_date"
-            android:inputType="date"
-            android:minHeight="48dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/profile_phone_number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_last_name"
-            tools:ignore="TextContrastCheck" />
+            <EditText
+                android:id="@+id/register_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/last_name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                tools:ignore="TextContrastCheck" />
 
-        <EditText
-            android:id="@+id/profile_phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/phone_number"
-            android:inputType="phone"
-            android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/profile_email"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_birth_date"
-            tools:ignore="TextContrastCheck" />
+            <EditText
+                android:id="@+id/register_birth_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/birth_date"
+                android:inputType="date|datetime"
+                android:minHeight="48dp"
+                android:visibility="visible"
+                tools:ignore="TextContrastCheck" />
 
-        <EditText
-            android:id="@+id/profile_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/register_password"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_phone_number" />
+            <EditText
+                android:id="@+id/register_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:minHeight="48dp"
+                tools:ignore="TextContrastCheck" />
 
-        <EditText
-            android:id="@+id/register_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/register_password_confirm"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_email"
-            tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+            <EditText
+                android:id="@+id/register_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp" />
 
-        <EditText
-            android:id="@+id/register_password_confirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/password_confirm"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/change_password"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_password"
-            tools:ignore="TextContrastCheck" />
+            <EditText
+                android:id="@+id/register_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
-        <Button
-            android:id="@+id/change_password"
-            android:layout_width="119dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:backgroundTint="#ecbeb4"
-            android:gravity="center|center_horizontal|center_vertical"
-            android:hint="@string/action_register"
-            android:textColor="#555"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_password_confirm"
-            tools:ignore="TextContrastCheck" />
+            <EditText
+                android:id="@+id/register_password_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/password_confirm"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                tools:ignore="TextContrastCheck" />
+
+            <Button
+                android:id="@+id/register_user"
+                android:layout_width="119dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="#ecbeb4"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:hint="@string/action_register"
+                android:textColor="#555"
+                tools:ignore="TextContrastCheck" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <Switch
+                android:id="@+id/is_professional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:minHeight="48dp"
+                android:text="@string/is_professional" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

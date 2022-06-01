@@ -22,4 +22,10 @@
         android:name="com.example.mopus.ui.menstrual_cycle.MenstrualCycleFragment"
         android:label="@string/title_menstrual_cycle"
         tools:layout="@layout/fragment_menstrual_cycle" />
+
+    <fragment
+        android:id="@+id/navigation_hiking_map"
+        android:name="com.example.mopus.ui.hiking.HikingFragment"
+        android:label="@string/title_hiking_map"
+        tools:layout="@layout/fragment_hiking_map" />
 </navigation>

@@ -32,6 +32,7 @@ public class ChangeInfo extends AppCompatActivity {
                 info.setHint("E-mail");
                 info.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
                 break;
+
         }
     }
 

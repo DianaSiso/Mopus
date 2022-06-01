@@ -27,6 +27,7 @@
     <string name="disable_notifications">Disable Notifications</string>
     <string name="title_menstrual_cycle">Menstrual Cycle</string>
     <string name="title_hiking_map">Hiking</string>
+    <string name="is_professional">Are you an healthcare professional?</string>
 
 
     <string-array name="water_per_day">

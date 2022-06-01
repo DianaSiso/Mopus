@@ -1,9 +1,11 @@
 package com.example.mopus;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,9 +63,35 @@ public class HomeActivity extends AppCompatActivity {
                 break;
             case R.id.profile_email:
                 from = "email";
+                break;
+            case R.id.profile_birth_date:
+                from = "birth_date";
+                break;
         }
         Intent intent = new Intent(view.getContext(), ChangeInfo.class);
         intent.putExtra("From", from);
         startActivity(intent);
+    }
+
+    public void walkingMode(View view) {
+        Button running_button = (Button) findViewById(R.id.running_mode);
+        running_button.setBackgroundColor(0xFFFFE7E0);
+        Button walking_button = (Button) findViewById(R.id.walking_mode);
+        walking_button.setBackgroundColor(0xFFFF9B7C);
+
+    }
+
+    public void runningMode(View view) {
+        Button walking_button = (Button) findViewById(R.id.walking_mode);
+        walking_button.setBackgroundColor(0xFFFFE7E0);
+        Button running_button = (Button) findViewById(R.id.running_mode);
+        running_button.setBackgroundColor(0xFFFF9B7C);
+    }
+
+    public void clickToMap(View view) {
+        Uri gmmIntentUri = Uri.parse("geo:0,0");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
     }
 }
