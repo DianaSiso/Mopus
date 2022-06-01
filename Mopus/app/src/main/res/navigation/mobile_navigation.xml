@@ -28,4 +28,10 @@
         android:name="com.example.mopus.ui.hiking.HikingFragment"
         android:label="@string/title_hiking_map"
         tools:layout="@layout/fragment_hiking_map" />
+
+    <fragment
+        android:id="@+id/navigation_stats"
+        android:name="com.example.mopus.ui.stats.StatsFragment"
+        android:label="@string/title_stats"
+        tools:layout="@layout/fragment_stats" />
 </navigation>
