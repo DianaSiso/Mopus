@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "568010829451",
+    "project_id": "mopus-98ec4",
+    "storage_bucket": "mopus-98ec4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568010829451:android:568b78bc6f94cf7af6ae8e",
+        "android_client_info": {
+          "package_name": "com.example.mopus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "568010829451-t25vpb7umspl2tbo3d6eb0lj2dd0t2da.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8YbgmMNj_m49NVru2G0nE82_XN1diBro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "568010829451-t25vpb7umspl2tbo3d6eb0lj2dd0t2da.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

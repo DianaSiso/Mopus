@@ -1,28 +1,60 @@
 package com.example.mopus;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.util.Patterns;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.example.mopus.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 
 public class Register extends AppCompatActivity {
 
-    EditText date;
+    private EditText firstName, lastName, date, phone, email, password, confirmPassword;
+    // TODO: ver se é profissional ou não
+
+    private ProgressBar progressBar;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        date = (EditText) findViewById(R.id.register_birth_date);
+        date = findViewById(R.id.register_birth_date);
+        firstName = findViewById(R.id.register_first_name);
+        lastName = findViewById(R.id.register_last_name);
+        date = findViewById(R.id.register_birth_date);
+        phone = findViewById(R.id.register_phone_number);
+        email = findViewById(R.id.register_email);
+        password = findViewById(R.id.register_password);
+        confirmPassword = findViewById(R.id.register_password_confirm);
+
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
         date.addTextChangedListener(new TextWatcher() {
 
             private String current = "";
-            private String ddmmyyyy = "DDMMYYYY";
+            final String ddmmyyyy = "DDMMYYYY";
             private Calendar cal = Calendar.getInstance();
 
             @Override
@@ -83,6 +115,121 @@ public class Register extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
 
     });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(mAuth.getCurrentUser() != null) {
+            // TODO: handle the already login user
+        }
+    }
+
+    public void registerUser(View view) {
+        String fName = firstName.getText().toString().trim();
+        String lName = lastName.getText().toString().trim();
+        String birthDate = date.getText().toString().trim();
+        String phoneNumber = phone.getText().toString().trim();
+        String userEmail = email.getText().toString().trim();
+        String pwd = password.getText().toString().trim();
+        String confirmPwd = confirmPassword.getText().toString().trim();
+        boolean isProfessional = false;
+
+        if(fName.isEmpty()) {
+            Log.d("Mopus", "first name is empty");
+            firstName.setError("name required");
+            firstName.requestFocus();
+            return;
+        }
+
+        if(lName.isEmpty()) {
+            lastName.setError("name required");
+            lastName.requestFocus();
+            return;
+        }
+
+        if(birthDate.isEmpty()) {
+            date.setError("birth day required");
+            date.requestFocus();
+            return;
+        }
+
+        if(phoneNumber.isEmpty()) {
+            phone.setError("phone number required");
+            phone.requestFocus();
+            return;
+        }
+
+        if(userEmail.isEmpty()) {
+            email.setError("email required");
+            email.requestFocus();
+            return;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
+            email.setError("enter a valid email");
+            email.requestFocus();
+            return;
+        }
+
+        if(pwd.isEmpty()) {
+            password.setError("password required");
+            password.requestFocus();
+            return;
+        }
+
+        if(confirmPwd.isEmpty()) {
+            confirmPassword.setError("please confirm password");
+            confirmPassword.requestFocus();
+            return;
+        }
+
+        if(confirmPwd.length() < 8) {
+            confirmPassword.setError("password should be at least 8 characters long");
+            confirmPassword.requestFocus();
+            return;
+        }
+
+        if(!pwd.equals(confirmPwd)) {
+            confirmPassword.setError("password confirmation is wrong");
+            confirmPassword.requestFocus();
+            return;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
+        mAuth.createUserWithEmailAndPassword(userEmail, pwd)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            // store additional fields in firebase database
+                            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                            User user = new User(userId, fName, lName, userEmail, phoneNumber, birthDate, isProfessional);
+
+                            Log.d("Mopus", "user ID: " + userId);
+
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                            db.collection("users")
+                                    .add(user.toDB())
+                                    .addOnCompleteListener(task1 -> {
+                                        progressBar.setVisibility(View.GONE);
+                                        if(task1.isSuccessful()) {
+                                            Toast.makeText(Register.this, "Successful registration", Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(Register.this, MainActivity.class);
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText(Register.this, "USER TABLE " + task1.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                        } else {
+                            Toast.makeText(Register.this, "FIREBASE AUTH " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 }
 
