@@ -1,16 +1,16 @@
-package com.example.mopus.ui.dashboard;
+package com.example.mopus.ui.menstrual_cycle;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class MenstrualCycleViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public MenstrualCycleViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is Menstrual Cycle fragment");
     }
 
     public LiveData<String> getText() {

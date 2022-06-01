@@ -14,24 +14,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mopus">
         <activity
-            android:name=".MenstrualCycle"
+            android:name=".HikingMap"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home" />
         <activity
-            android:name=".DrinkWater"
-            android:exported="false" />
-        <activity
             android:name=".ChangeInfo"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity"/>
+        </activity>
         <activity
             android:name=".ChangePassword"
-            android:exported="false" />
-        <activity
-            android:name=".UserProfile"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity"/>
+        </activity>
         <activity
             android:name=".Register"
             android:exported="false" />

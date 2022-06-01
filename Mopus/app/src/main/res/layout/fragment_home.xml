@@ -6,9 +6,7 @@
     android:layout_height="match_parent"
     android:background="#EAFFFF">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -131,24 +129,22 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/text_sleep_time"
+                    android:id="@+id/text_wake_up_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:text="@string/time_wake_up"
+                    android:text="@string/time_sleep"
                     android:textColor="#000"
                     android:textColorHint="#000" />
 
                 <TextView
-                    android:id="@+id/text_wake_up_time"
+                    android:id="@+id/text_sleep_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="0dp"
                     android:layout_weight="1"
-                    android:text="@string/time_sleep"
+                    android:text="@string/time_wake_up"
                     android:textColor="#000"
                     android:textColorHint="#000" />
 
@@ -161,7 +157,7 @@
                 android:orientation="horizontal">
 
                 <Spinner
-                    android:id="@+id/wake_up_time"
+                    android:id="@+id/sleep_time"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginRight="10dp"
@@ -173,7 +169,7 @@
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <Spinner
-                    android:id="@+id/sleep_time"
+                    android:id="@+id/wake_up_time"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
@@ -188,11 +184,11 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="100dp" />
+                android:layout_height="80dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -202,7 +198,20 @@
                     android:layout_height="wrap_content"
                     android:background="#FFF171"
                     android:text="@string/action_save" />
+
             </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <Switch
+                android:id="@+id/disable_drink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="48dp"
+                android:text="@string/disable_notifications" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

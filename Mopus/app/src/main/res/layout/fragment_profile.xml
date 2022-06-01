@@ -26,7 +26,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/register_last_name"
+        android:id="@+id/profile_last_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_last_name"
+        app:layout_constraintTop_toBottomOf="@+id/profile_last_name"
         tools:ignore="TextContrastCheck" />
 
     <TextView
@@ -200,7 +200,7 @@
         android:onClick="clickToChangeInfo"
         android:padding="5dp"
         android:textColorHint="#907862"
-        app:layout_constraintBottom_toTopOf="@+id/register_last_name"
+        app:layout_constraintBottom_toTopOf="@+id/profile_last_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

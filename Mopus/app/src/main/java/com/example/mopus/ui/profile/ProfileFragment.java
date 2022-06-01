@@ -37,30 +37,4 @@ public class ProfileFragment extends Fragment {
         binding = null;
     }
 
-    public void clickToChangePassword(View view) {
-        Intent intent = new Intent(view.getContext(), ChangePassword.class);
-        startActivity(intent);
-    }
-
-    public void clickToChangeInfo(View view) {
-        Log.d("clickID", String.valueOf(view.getId()));
-        String id = String.valueOf(view.getId());
-        String from = "";
-        switch (id) {
-            case "2131165334":
-                from = "first_name";
-                break;
-            case "2131165343":
-                from = "last_name";
-                break;
-            case "2131165337":
-                from = "phone_number";
-                break;
-            case "2131165333":
-                from = "email";
-        }
-        Intent intent = new Intent(view.getContext(), ChangeInfo.class);
-        intent.putExtra("From", from);
-        startActivity(intent);
-    }
 }
