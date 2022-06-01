@@ -28,6 +28,7 @@
     <string name="title_menstrual_cycle">Menstrual Cycle</string>
     <string name="title_hiking_map">Hiking</string>
     <string name="is_professional">Are you an healthcare professional?</string>
+    <string name="menstrual_cycle_disable">Menstrual Cycle Disable?</string>
 
 
     <string-array name="water_per_day">
