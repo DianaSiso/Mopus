@@ -12,6 +12,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.mopus.model.User;
@@ -26,7 +27,7 @@ import java.util.Calendar;
 public class Register extends AppCompatActivity {
 
     private EditText firstName, lastName, date, phone, email, password, confirmPassword;
-    // TODO: ver se é profissional ou não
+    private Switch isProfessionalSwitch;
 
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
@@ -44,6 +45,7 @@ public class Register extends AppCompatActivity {
         email = findViewById(R.id.register_email);
         password = findViewById(R.id.register_password);
         confirmPassword = findViewById(R.id.register_password_confirm);
+        isProfessionalSwitch = findViewById(R.id.is_professional);
 
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
@@ -123,6 +125,8 @@ public class Register extends AppCompatActivity {
 
         if(mAuth.getCurrentUser() != null) {
             // TODO: handle the already login user
+            /*Intent intent = new Intent(Register.this, HomeActivity.class);
+            startActivity(intent);*/
         }
     }
 
@@ -134,7 +138,7 @@ public class Register extends AppCompatActivity {
         String userEmail = email.getText().toString().trim();
         String pwd = password.getText().toString().trim();
         String confirmPwd = confirmPassword.getText().toString().trim();
-        boolean isProfessional = false;
+        boolean isProfessional = isProfessionalSwitch.isChecked();
 
         if(fName.isEmpty()) {
             Log.d("Mopus", "first name is empty");
