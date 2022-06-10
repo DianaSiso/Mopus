@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mopus">
+    package="com.example.mopus" >
 
     <meta-data
         android:name="com.google.android.geo.API_KEY"
@@ -12,10 +12,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Mopus">
+        android:theme="@style/Theme.Mopus" >
         <activity
-            android:name=".ProfessionalActivity"
-            android:exported="false" />
+            android:name=".ProfessionalActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_professional2" />
         <activity
             android:name=".HomeActivity"
             android:exported="false"
@@ -23,7 +24,7 @@
         <activity
             android:name=".ChangeInfo"
             android:exported="false"
-            android:parentActivityName=".HomeActivity">
+            android:parentActivityName=".HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
@@ -31,7 +32,7 @@
         <activity
             android:name=".ChangePassword"
             android:exported="false"
-            android:parentActivityName=".HomeActivity">
+            android:parentActivityName=".HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
@@ -41,7 +42,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

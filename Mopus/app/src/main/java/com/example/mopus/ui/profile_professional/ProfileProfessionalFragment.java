@@ -1,4 +1,4 @@
-package com.example.mopus.ui.profile;
+package com.example.mopus.ui.profile_professional;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,17 +10,18 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mopus.databinding.FragmentProfileBinding;
+import com.example.mopus.databinding.FragmentProfileProfessionalBinding;
 
-public class ProfileFragment extends Fragment {
+public class ProfileProfessionalFragment extends Fragment {
 
-    private FragmentProfileBinding binding;
+    private FragmentProfileProfessionalBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ProfileViewModel notificationsViewModel =
-                new ViewModelProvider(this, (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(ProfileViewModel.class);
+        ProfileProfessionalViewModel notificationsViewModel =
+                new ViewModelProvider(this, (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(ProfileProfessionalViewModel.class);
 
-        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        binding = FragmentProfileProfessionalBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         return root;
