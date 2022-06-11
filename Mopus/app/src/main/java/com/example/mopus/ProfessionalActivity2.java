@@ -2,6 +2,7 @@ package com.example.mopus;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -42,6 +43,37 @@ public class ProfessionalActivity2 extends AppCompatActivity {
     public void logoutProfessional(View view) {
         mAuth.signOut();
         Intent intent = new Intent(view.getContext(), MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void clickToChangePassword(View view) {
+        Intent intent = new Intent(view.getContext(), ChangePassword.class);
+        startActivity(intent);
+    }
+
+    public void clickToChangeInfo(View view) {
+        Log.d("clickID", String.valueOf(view.getId()));
+        Integer id = view.getId();
+        String from = "";
+        switch (id) {
+            case R.id.profile_first_name:
+                from = "first_name";
+                break;
+            case R.id.profile_last_name:
+                from = "last_name";
+                break;
+            case R.id.profile_phone_number:
+                from = "phone_number";
+                break;
+            case R.id.profile_email:
+                from = "email";
+                break;
+            case R.id.profile_birth_date:
+                from = "birth_date";
+                break;
+        }
+        Intent intent = new Intent(view.getContext(), ChangeInfo.class);
+        intent.putExtra("From", from);
         startActivity(intent);
     }
 
