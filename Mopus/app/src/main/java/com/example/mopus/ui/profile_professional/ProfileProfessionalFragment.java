@@ -1,8 +1,6 @@
 package com.example.mopus.ui.profile_professional;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.mopus.HomeActivity;
+/*import com.example.mopus.HomeActivity;
 import com.example.mopus.MainActivity;
-import com.example.mopus.ProfessionalActivity2;
+import com.example.mopus.ProfessionalActivity2;*/
 import com.example.mopus.databinding.FragmentProfileProfessionalBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+/*import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task*/;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
+/*import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.Map;
+import java.util.Map;*/
 
 public class ProfileProfessionalFragment extends Fragment {
 
@@ -41,21 +39,28 @@ public class ProfileProfessionalFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ProfileProfessionalViewModel notificationsViewModel =
+        ProfileProfessionalViewModel profileProfessionalViewModel =
                 new ViewModelProvider(this, (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(ProfileProfessionalViewModel.class);
 
         binding = FragmentProfileProfessionalBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+        /*mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();*/
 
         firstName = binding.profileFirstName;
         lastName = binding.profileLastName;
         birthDate = binding.profileBirthDate;
         phoneNumber = binding.profilePhoneNumber;
         email = binding.profileEmail;
-        email.setText(mAuth.getCurrentUser().getEmail());
+
+        profileProfessionalViewModel.getFirstName().observe(getViewLifecycleOwner(), firstName::setText);
+        profileProfessionalViewModel.getLastName().observe(getViewLifecycleOwner(), lastName::setText);
+        profileProfessionalViewModel.getBirthDate().observe(getViewLifecycleOwner(), birthDate::setText);
+        profileProfessionalViewModel.getPhoneNumber().observe(getViewLifecycleOwner(), phoneNumber::setText);
+        profileProfessionalViewModel.getEmail().observe(getViewLifecycleOwner(), email::setText);
+
+        /*email.setText(mAuth.getCurrentUser().getEmail());
 
         db.collection("users")
                 .whereEqualTo("id", mAuth.getCurrentUser().getUid())
@@ -78,7 +83,7 @@ public class ProfileProfessionalFragment extends Fragment {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
                     }
-                });
+                });*/
         return root;
     }
 
