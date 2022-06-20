@@ -2,9 +2,11 @@ package com.example.mopus;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 
+import com.example.mopus.qrCode.CameraXLivePreviewActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -22,6 +24,17 @@ public class ProfessionalActivity2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(
+                    new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
+            StrictMode.setVmPolicy(
+                    new StrictMode.VmPolicy.Builder()
+                            .detectLeakedSqlLiteObjects()
+                            .detectLeakedClosableObjects()
+                            .penaltyLog()
+                            .build());
+        }
+
         super.onCreate(savedInstanceState);
 
         mAuth = FirebaseAuth.getInstance();
@@ -75,6 +88,10 @@ public class ProfessionalActivity2 extends AppCompatActivity {
         Intent intent = new Intent(view.getContext(), ChangeInfo.class);
         intent.putExtra("From", from);
         startActivity(intent);
+    }
+
+    public void clickToScan(View view) {
+        startActivity(new Intent(view.getContext(), CameraXLivePreviewActivity.class));
     }
 
 }
