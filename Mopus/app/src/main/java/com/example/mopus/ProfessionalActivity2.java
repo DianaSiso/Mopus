@@ -90,8 +90,4 @@ public class ProfessionalActivity2 extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void clickToScan(View view) {
-        startActivity(new Intent(view.getContext(), CameraXLivePreviewActivity.class));
-    }
-
 }

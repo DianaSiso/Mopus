@@ -37,10 +37,7 @@
         <meta-data
             android:name="com.example.mopus.DEPENDENCIES"
             android:value="barcode" />
-        <activity
-            android:name=".qrCode.ChooserActivity"
-            android:exported="true" />
-            <!--android:theme="@style/AppTheme">-->
+        <!--android:theme="@style/AppTheme">-->
         <!--</activity>-->
         <activity
             android:name=".qrCode.CameraXLivePreviewActivity"

@@ -52,7 +52,6 @@ public class AnalysisFragment extends Fragment {
         scanButton.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                  //getActivity().clickToScan(view);
                   startActivity(new Intent(view.getContext(), CameraXLivePreviewActivity.class));
               }
           }
