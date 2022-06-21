@@ -1,13 +1,30 @@
 package com.example.mopus;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.mopus.model.WaterTime;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.fragment.app.Fragment;
@@ -19,10 +36,25 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.mopus.databinding.ActivityHomeBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
+    private int progr = 0;
+    private String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +113,80 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+
+
+    public void clickToSearchDay(View view) {
+        TreeMap<Integer, String> sorted = new TreeMap<Integer, String>();
+        BarChart barChart = findViewById(R.id.barchart);
+        barChart.setVisibility(View.VISIBLE);
+
+        Spinner mySpinner = findViewById(R.id.spinner_months);
+        String month = mySpinner.getSelectedItem().toString();
+        HashMap<Integer, String> values_per_day = new HashMap<>();
+
+        DocumentReference docIdRef = db.collection("water").document(email);
+        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("Getting data from DB", "... Complete.");
+                        HashMap<String, HashMap<String, Double>> spd = (HashMap<String, HashMap<String, Double>>) document.getData().get("stats_per_day");
+                        Log.d("Value", String.valueOf(spd.keySet()));
+
+                        for (String day : spd.keySet()) {
+                            if (day.contains(month)) {
+                                // Log.d("DAY_DEBUG", day);
+                                // Log.d("DAY_NUMBER", day.replace(month + " ", ""));
+                                // Log.d("DAY_VALUE", String.valueOf(spd.get(day)));
+                                values_per_day.put( Integer.parseInt(day.replace(month + " ", "")), String.valueOf(spd.get(day)));
+                            }
+                        }
+
+                        TreeMap<Integer, String> sorted = new TreeMap<Integer, String>(values_per_day);
+
+                        // Display the TreeMap which is naturally sorted
+                        for (Map.Entry<Integer, String> entry :
+                                sorted.entrySet())
+                            System.out.println("Key = " + entry.getKey()
+                                    + ", Value = "
+                                    + entry.getValue());
+
+                        Log.d("ARRAY", String.valueOf(sorted));
+
+                        ArrayList<BarEntry> barArrayList = new ArrayList<>();
+
+                        for (int i=0; i< sorted.size();i++) {
+                            Log.d("lxlx:", String.valueOf(sorted.get(i)));
+                            if (sorted.get(i) != null) {
+                                barArrayList.add(new BarEntry(Float.parseFloat(String.valueOf(i+1)), Float.parseFloat(sorted.get(i))));
+                            }
+                        }
+                        Log.d("DDDD", String.valueOf(barArrayList));
+
+                        BarDataSet barDataSet = new BarDataSet(barArrayList, "water per day");
+                        BarData barData = new BarData(barDataSet);
+                        barChart.setData(barData);
+                        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+                        barDataSet.setValueTextColor(Color.BLACK);
+                        barDataSet.setValueTextSize((16f));
+                        barChart.getDescription().setEnabled(true);
+
+                    }
+                } else {
+                    Log.d("email", "Failed with: ", task.getException());
+                }
+            }
+        });
+
+
+
+    }
+
+
     public void runningMode(View view) {
         Button walking_button = (Button) findViewById(R.id.walking_mode);
         walking_button.setBackgroundColor(0xFFFFE7E0);
@@ -94,4 +200,125 @@ public class HomeActivity extends AppCompatActivity {
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
     }
+
+    public void editInfo(View view) {
+        LinearLayout first = findViewById(R.id.inputs_water);
+        LinearLayout second = findViewById(R.id.inputs_time);
+        Button save = findViewById(R.id.button_save_water);
+        LinearLayout third = findViewById(R.id.texts_time);
+        if (third.getVisibility() ==  View.INVISIBLE) {
+            third.setVisibility(View.VISIBLE);
+            save.setVisibility(View.VISIBLE);
+            first.setVisibility(View.VISIBLE);
+            second.setVisibility(View.VISIBLE);
+        } else {
+            third.setVisibility(View.INVISIBLE);
+            save.setVisibility(View.INVISIBLE);
+            first.setVisibility(View.INVISIBLE);
+            second.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void saveInfo(View view) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docIdRef = db.collection("water").document(email);
+        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                // new input
+                EditText water_total = findViewById(R.id.input_water_total);
+                String wt = String.valueOf(water_total.getText());
+                int value_water_total = Integer.parseInt(wt);
+                EditText water_cup = findViewById(R.id.input_water_cup);
+                String wc = String.valueOf(water_cup.getText());
+                int value_water_cup = Integer.parseInt(wc);
+                Spinner sleep_time = findViewById(R.id.input_sleep_time);
+                String st = sleep_time.getSelectedItem().toString();
+                int value_sleep_time = Integer.parseInt(st.substring(0,2));
+                Spinner wake_up_time = findViewById(R.id.input_wake_up_time);
+                String wut = wake_up_time.getSelectedItem().toString();
+                int value_wake_up_time = Integer.parseInt(wut.substring(0,2));
+
+                WaterTime water_time = new WaterTime(value_water_total, value_water_cup, value_sleep_time, value_wake_up_time);
+
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("Water", "Update DB");
+                        db.collection("water").document(email)
+                                .update(water_time.toDB())
+                                .addOnCompleteListener(task1 -> {
+                                    if(task1.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), "Successful update", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "WATER TABLE " + task1.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                    } else {
+                        Log.d("Water", "Register DB");
+                        db.collection("water")
+                                .add(water_time.toDB())
+                                .addOnCompleteListener(task1 -> {
+                                    if(task1.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), "Successful registration", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "WATER TABLE " + task1.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                    }
+                } else {
+                    Log.d(email, "Failed with: ", task.getException());
+                }
+            }
+        });
+
+        LinearLayout first = findViewById(R.id.inputs_water);
+        LinearLayout second = findViewById(R.id.inputs_time);
+        Button save = findViewById(R.id.button_save_water);
+        LinearLayout third = findViewById(R.id.texts_time);
+        third.setVisibility(View.INVISIBLE);
+        save.setVisibility(View.INVISIBLE);
+        first.setVisibility(View.INVISIBLE);
+        second.setVisibility(View.INVISIBLE);
+
+        finish();
+        startActivity(getIntent());
+    }
+
+
+    public void addWater(View view) {
+        ProgressBar progress_bar = findViewById(R.id.progress_bar_water);
+        TextView progress_bar_text = findViewById(R.id.progress_bar_water_text);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docIdRef = db.collection("water").document(email);
+        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("Getting data from DB", "... Complete.");
+                        Object wad = document.getData().get("water_already_drunk");
+                        Object wc = document.getData().get("water_cup");
+                        Object wt = document.getData().get("water_total");
+                        double water_already_drunk = Double.parseDouble(String.valueOf(wad));
+                        double water_cup = Double.parseDouble(String.valueOf(wc));
+                        double water_total = Double.parseDouble(String.valueOf(wt));
+                        progr = (int) ((water_already_drunk+water_cup)/water_total * 100);
+                        if (progr > 100) {
+                            progr = 100;
+                        }
+                        progress_bar.setProgress(progr);
+                        progress_bar_text.setText(String.valueOf(progr) + "%");
+                        db.collection("water").document(email).update("water_already_drunk", water_already_drunk+water_cup);
+                    } else {
+                        Log.d("Getting data from DB", "... Error.");
+                    }
+                } else {
+                    Log.d(email, "Failed with: ", task.getException());
+                }
+            }
+        });
+    }
+
 }

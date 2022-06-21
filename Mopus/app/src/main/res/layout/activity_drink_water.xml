@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:onClick="editInfo"
+    tools:context=".DrinkWater">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar_water"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:indeterminateOnly="false"
+                android:progressDrawable="@drawable/circle" />
+
+            <TextView
+                android:id="@+id/progress_bar_water_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:visibility="visible" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <Button
+                android:id="@+id/button_add_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#71c2f8"
+                android:onClick="addWater"
+                android:text="@string/add_water"
+                android:textColor="#000000" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+            <LinearLayout
+                android:id="@+id/inputs_water"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:visibility="invisible">
+
+                <EditText
+                    android:id="@+id/input_water_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#000000"
+                    android:ems="10"
+                    android:hint="@string/water_total"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:minHeight="48dp"
+                    android:text="0"
+                    tools:ignore="TextContrastCheck" />
+
+                <EditText
+                    android:id="@+id/input_water_cup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#000000"
+                    android:ems="10"
+                    android:hint="@string/water_cup"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:text="0"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:id="@+id/texts_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="invisible">
+
+                <TextView
+                    android:id="@+id/text_wake_up_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/time_sleep"
+                    android:textColor="#000"
+                    android:textColorHint="#000" />
+
+                <TextView
+                    android:id="@+id/text_sleep_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/time_wake_up"
+                    android:textColor="#000"
+                    android:textColorHint="#000" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/inputs_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="invisible">
+
+                <Spinner
+                    android:id="@+id/input_sleep_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@android:drawable/arrow_down_float"
+                    android:hint="@string/time_sleep"
+                    android:spinnerMode="dropdown"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Spinner
+                    android:id="@+id/input_wake_up_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:dropDownSelector="@android:drawable/arrow_down_float"
+                    android:hint="@string/time_wake_up"
+                    android:spinnerMode="dropdown"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_save_water"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:backgroundTint="#000000"
+                    android:onClick="saveInfo"
+                    android:text="@string/action_save"
+                    android:textColor="#FFFFFF"
+                    android:visibility="invisible" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:onClick="editInfo"
+                    app:srcCompat="@drawable/ic_baseline_edit_24"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

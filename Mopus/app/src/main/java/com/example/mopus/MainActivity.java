@@ -47,9 +47,25 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         if(mAuth.getCurrentUser() != null) {
-            // TODO: handle the already login user
-            /*Intent intent = new Intent(Register.this, HomeActivity.class);
-            startActivity(intent);*/
+            db.collection("users")
+                    .whereEqualTo("id", mAuth.getCurrentUser().getUid())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    String email = (String) document.getData().get("email");
+                                    Map<String, Object> user = document.getData();
+                                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                    intent.putExtra("email", email);
+                                    startActivity(intent);
+                                }
+                            } else {
+                                Log.w(TAG, "Error getting documents.", task.getException());
+                            }
+                        }
+                    });
         }
     }
 
@@ -61,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     public void clickToSignIn(View view) {
         String email = emailText.getText().toString().trim();
         String password = passwordText.getText().toString().trim();
+
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -85,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
                                                     if(user.get("isProfessional").toString().equals("false")) {
                                                         intent = new Intent(MainActivity.this, HomeActivity.class);
+                                                        intent.putExtra("email", email);
                                                     } else {
                                                         intent = new Intent(MainActivity.this, ProfessionalActivity.class);
                                                     }
