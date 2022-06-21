@@ -23,7 +23,7 @@ public class HikingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HikingViewModel hikingViewModel =
-                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(HikingViewModel.class);
+                new ViewModelProvider(this, (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(HikingViewModel.class);
 
         binding = FragmentHikingMapBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

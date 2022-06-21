@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation2"
+    app:startDestination="@+id/navigation_home_professional">
+
+    <fragment
+        android:id="@+id/navigation_home_professional"
+        android:name="com.example.mopus.ui.home_professional.HomeProfessionalFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home_professional" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.mopus.ui.analysis.AnalysisFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_analysis" />
+
+    <fragment
+        android:id="@+id/navigation_profile_professional"
+        android:name="com.example.mopus.ui.profile_professional.ProfileProfessionalFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile_professional" />
+</navigation>
