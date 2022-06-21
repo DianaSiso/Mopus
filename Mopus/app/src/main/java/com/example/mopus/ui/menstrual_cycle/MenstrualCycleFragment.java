@@ -19,7 +19,7 @@ public class MenstrualCycleFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         MenstrualCycleViewModel menstrualCycleViewModel =
-                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MenstrualCycleViewModel.class);
+                new ViewModelProvider(this, (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(MenstrualCycleViewModel.class);
 
         binding = FragmentMenstrualCycleBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

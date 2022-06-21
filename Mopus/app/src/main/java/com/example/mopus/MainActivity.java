@@ -46,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        Log.d(TAG, "onStart");
+
         if(mAuth.getCurrentUser() != null) {
+            Log.d(TAG, "USER NOT NULL");
             db.collection("users")
                     .whereEqualTo("id", mAuth.getCurrentUser().getUid())
                     .get()
@@ -55,10 +58,12 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
+
                                     String email = (String) document.getData().get("email");
                                     Map<String, Object> user = document.getData();
-                                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                    Intent intent = new Intent(MainActivity.this, user.get("isProfessional").toString().equals("false") ? HomeActivity.class : ProfessionalActivity2.class);
                                     intent.putExtra("email", email);
+
                                     startActivity(intent);
                                 }
                             } else {
@@ -72,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
     public void clickToSignUp(View view) {
         Intent intent = new Intent(this, Register.class);
         startActivity(intent);
+        /*emailText.setText("");
+        passwordText.setText("");*/
     }
 
     public void clickToSignIn(View view) {
@@ -98,14 +105,10 @@ public class MainActivity extends AppCompatActivity {
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
 
                                                     Map<String, Object> user = document.getData();
-                                                    Intent intent;
+                                                    Log.d(TAG, user.get("isProfessional").toString());
+                                                    Intent intent = new Intent(MainActivity.this, user.get("isProfessional").toString().equals("false") ? HomeActivity.class : ProfessionalActivity2.class);
+                                                    intent.putExtra("email", email);
 
-                                                    if(user.get("isProfessional").toString().equals("false")) {
-                                                        intent = new Intent(MainActivity.this, HomeActivity.class);
-                                                        intent.putExtra("email", email);
-                                                    } else {
-                                                        intent = new Intent(MainActivity.this, ProfessionalActivity.class);
-                                                    }
                                                     startActivity(intent);
                                                 }
                                             } else {
@@ -122,6 +125,9 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+       /* emailText.setText("");
+        passwordText.setText("");*/
 
     }
 

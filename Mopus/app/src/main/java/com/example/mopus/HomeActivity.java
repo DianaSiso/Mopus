@@ -56,9 +56,13 @@ public class HomeActivity extends AppCompatActivity {
     private String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAuth = FirebaseAuth.getInstance();
 
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -76,6 +80,12 @@ public class HomeActivity extends AppCompatActivity {
 
     public void clickToChangePassword(View view) {
         Intent intent = new Intent(view.getContext(), ChangePassword.class);
+        startActivity(intent);
+    }
+
+    public void logout(View view) {
+        mAuth.signOut();
+        Intent intent = new Intent(view.getContext(), MainActivity.class);
         startActivity(intent);
     }
 
