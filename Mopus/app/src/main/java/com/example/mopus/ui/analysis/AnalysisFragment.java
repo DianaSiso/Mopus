@@ -3,7 +3,6 @@ package com.example.mopus.ui.analysis;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +15,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.mopus.BuildConfig;
 import com.example.mopus.databinding.FragmentAnalysisBinding;
-import com.example.mopus.qrCode.CameraXLivePreviewActivity;
+import com.example.mopus.qrCodeScanner.CameraXLivePreviewActivity;
 
 import org.jetbrains.annotations.NotNull;
 

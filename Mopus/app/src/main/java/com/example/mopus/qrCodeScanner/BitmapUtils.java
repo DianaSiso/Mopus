@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode;
+package com.example.mopus.qrCodeScanner;
 
 import android.content.ContentResolver;
 import android.graphics.Bitmap;
@@ -45,7 +45,7 @@ public class BitmapUtils {
 
   /** Converts NV21 format byte buffer to bitmap. */
   @Nullable
-  public static Bitmap getBitmap(ByteBuffer data, com.example.mopus.qrCode.FrameMetadata metadata) {
+  public static Bitmap getBitmap(ByteBuffer data, com.example.mopus.qrCodeScanner.FrameMetadata metadata) {
     data.rewind();
     byte[] imageInBuffer = new byte[data.limit()];
     data.get(imageInBuffer, 0, imageInBuffer.length);
@@ -71,8 +71,8 @@ public class BitmapUtils {
   @Nullable
   @ExperimentalGetImage
   public static Bitmap getBitmap(ImageProxy image) {
-    com.example.mopus.qrCode.FrameMetadata frameMetadata =
-        new com.example.mopus.qrCode.FrameMetadata.Builder()
+    com.example.mopus.qrCodeScanner.FrameMetadata frameMetadata =
+        new com.example.mopus.qrCodeScanner.FrameMetadata.Builder()
             .setWidth(image.getWidth())
             .setHeight(image.getHeight())
             .setRotation(image.getImageInfo().getRotationDegrees())

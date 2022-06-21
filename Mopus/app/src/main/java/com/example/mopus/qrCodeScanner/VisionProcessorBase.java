@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode;
+package com.example.mopus.qrCodeScanner;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -34,7 +34,7 @@ import androidx.annotation.RequiresApi;
 import androidx.camera.core.ExperimentalGetImage;
 import androidx.camera.core.ImageProxy;
 
-import com.example.mopus.qrCode.preference.PreferenceUtils;
+import com.example.mopus.qrCodeScanner.preference.PreferenceUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.gms.tasks.Tasks;

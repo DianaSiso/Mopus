@@ -18,6 +18,9 @@ public class ChangeInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_info);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         String from = getIntent().getExtras().getString("From");
         Log.d("check", from);
         EditText info = (EditText) findViewById(R.id.change_info_info);
@@ -108,6 +111,10 @@ public class ChangeInfo extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
 }

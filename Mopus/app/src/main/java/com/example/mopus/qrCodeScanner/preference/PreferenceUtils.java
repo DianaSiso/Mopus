@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode.preference;
+package com.example.mopus.qrCodeScanner.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -29,7 +29,7 @@ import com.example.mopus.R;
 import com.google.android.gms.common.images.Size;
 import com.google.android.gms.vision.CameraSource;
 import com.google.common.base.Preconditions;
-import com.example.mopus.qrCode.CameraSource.SizePair;
+import com.example.mopus.qrCodeScanner.CameraSource.SizePair;
 
 /** Utility class to retrieve shared preferences. */
 public class PreferenceUtils {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode;
+package com.example.mopus.qrCodeScanner;
 
 /** Describing a frame info. */
 public class FrameMetadata {

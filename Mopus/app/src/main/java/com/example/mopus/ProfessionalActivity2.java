@@ -6,14 +6,14 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 
-import com.example.mopus.qrCode.CameraXLivePreviewActivity;
+import com.example.mopus.databinding.ActivityProfessional2Binding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.example.mopus.databinding.ActivityProfessional2Binding;
+
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfessionalActivity2 extends AppCompatActivity {

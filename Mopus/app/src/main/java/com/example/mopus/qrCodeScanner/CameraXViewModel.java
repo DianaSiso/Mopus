@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode;
+package com.example.mopus.qrCodeScanner;
 
 import android.app.Application;
 import android.os.Build.VERSION_CODES;

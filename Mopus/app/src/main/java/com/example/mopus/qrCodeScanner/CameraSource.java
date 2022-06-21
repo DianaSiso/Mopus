@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode;
+package com.example.mopus.qrCodeScanner;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -31,7 +31,7 @@ import android.view.WindowManager;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import com.google.android.gms.common.images.Size;
-import com.example.mopus.qrCode.preference.PreferenceUtils;
+import com.example.mopus.qrCodeScanner.preference.PreferenceUtils;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -88,7 +88,7 @@ public class CameraSource {
   // to it.
   private SurfaceTexture dummySurfaceTexture;
 
-  private final com.example.mopus.qrCode.GraphicOverlay graphicOverlay;
+  private final com.example.mopus.qrCodeScanner.GraphicOverlay graphicOverlay;
 
   /**
    * Dedicated thread and associated runnable for calling into the detector with frames, as the
@@ -99,7 +99,7 @@ public class CameraSource {
   private final FrameProcessingRunnable processingRunnable;
   private final Object processorLock = new Object();
 
-  private com.example.mopus.qrCode.VisionImageProcessor frameProcessor;
+  private com.example.mopus.qrCodeScanner.VisionImageProcessor frameProcessor;
 
   /**
    * Map to convert between a byte array, received from the camera, and its associated byte buffer.
@@ -112,7 +112,7 @@ public class CameraSource {
    */
   private final IdentityHashMap<byte[], ByteBuffer> bytesToByteBuffer = new IdentityHashMap<>();
 
-  public CameraSource(Activity activity, com.example.mopus.qrCode.GraphicOverlay overlay) {
+  public CameraSource(Activity activity, com.example.mopus.qrCodeScanner.GraphicOverlay overlay) {
     this.activity = activity;
     graphicOverlay = overlay;
     graphicOverlay.clear();

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode;
+package com.example.mopus.qrCodeScanner;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -24,7 +24,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
 import com.google.android.gms.common.images.Size;
-import com.example.mopus.qrCode.preference.PreferenceUtils;
+import com.example.mopus.qrCodeScanner.preference.PreferenceUtils;
 import java.io.IOException;
 
 /** Preview the camera image in the screen. */
@@ -37,7 +37,7 @@ public class CameraSourcePreview extends ViewGroup {
   private boolean surfaceAvailable;
   private CameraSource cameraSource;
 
-  private com.example.mopus.qrCode.GraphicOverlay overlay;
+  private com.example.mopus.qrCodeScanner.GraphicOverlay overlay;
 
   public CameraSourcePreview(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -59,7 +59,7 @@ public class CameraSourcePreview extends ViewGroup {
     }
   }
 
-  public void start(CameraSource cameraSource, com.example.mopus.qrCode.GraphicOverlay overlay) throws IOException {
+  public void start(CameraSource cameraSource, com.example.mopus.qrCodeScanner.GraphicOverlay overlay) throws IOException {
     this.overlay = overlay;
     start(cameraSource);
   }

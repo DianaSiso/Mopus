@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode.preference;
+package com.example.mopus.qrCodeScanner.preference;
 
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -22,8 +22,8 @@ import android.preference.ListPreference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import androidx.annotation.StringRes;
-import com.example.mopus.qrCode.CameraSource;
-import com.example.mopus.qrCode.CameraSource.SizePair;
+import com.example.mopus.qrCodeScanner.CameraSource;
+import com.example.mopus.qrCodeScanner.CameraSource.SizePair;
 import com.example.mopus.R;
 import java.util.HashMap;
 import java.util.List;
@@ -90,7 +90,7 @@ public class LivePreviewPreferenceFragment extends PreferenceFragment {
         String previewSizeString = sizePair.preview.toString();
         previewSizePreference.setValue(previewSizeString);
         previewSizePreference.setSummary(previewSizeString);
-        com.example.mopus.qrCode.preference.PreferenceUtils.saveString(
+        com.example.mopus.qrCodeScanner.preference.PreferenceUtils.saveString(
             getActivity(),
             pictureSizePrefKeyId,
             sizePair.picture != null ? sizePair.picture.toString() : null);

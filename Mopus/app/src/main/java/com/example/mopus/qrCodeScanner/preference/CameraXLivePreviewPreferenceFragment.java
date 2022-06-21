@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode.preference;
+package com.example.mopus.qrCodeScanner.preference;
 
 import android.content.Context;
 import android.graphics.SurfaceTexture;
@@ -37,7 +37,7 @@ import java.util.List;
 
 /** Configures CameraX live preview demo settings. */
 @RequiresApi(VERSION_CODES.LOLLIPOP)
-public class CameraXLivePreviewPreferenceFragment extends com.example.mopus.qrCode.preference.LivePreviewPreferenceFragment {
+public class CameraXLivePreviewPreferenceFragment extends com.example.mopus.qrCodeScanner.preference.LivePreviewPreferenceFragment {
 
   @Override
   void setUpCameraPreferences() {

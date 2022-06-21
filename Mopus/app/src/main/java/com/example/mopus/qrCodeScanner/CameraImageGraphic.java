@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode;
+package com.example.mopus.qrCodeScanner;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import com.example.mopus.qrCode.GraphicOverlay.Graphic;
+import com.example.mopus.qrCodeScanner.GraphicOverlay.Graphic;
 
 /** Draw camera image to background. */
 public class CameraImageGraphic extends Graphic {

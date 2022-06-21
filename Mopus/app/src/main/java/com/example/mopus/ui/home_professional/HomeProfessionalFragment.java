@@ -4,14 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Region;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,15 +15,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mopus.MainActivity;
 import com.example.mopus.R;
-import com.example.mopus.databinding.FragmentHomeBinding;
 import com.example.mopus.databinding.FragmentHomeProfessionalBinding;
 import com.example.mopus.model.Scan;
-import com.example.mopus.qrCode.ResultActivity;
+import com.example.mopus.qrCodeScanner.ResultActivity;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 

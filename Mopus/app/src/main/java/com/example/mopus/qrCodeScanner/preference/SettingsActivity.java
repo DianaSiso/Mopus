@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode.preference;
+package com.example.mopus.qrCodeScanner.preference;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;

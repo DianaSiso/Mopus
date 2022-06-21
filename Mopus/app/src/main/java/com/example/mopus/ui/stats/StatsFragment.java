@@ -1,6 +1,6 @@
 package com.example.mopus.ui.stats;
 
-import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.mopus.QrCodeActivity;
 import com.example.mopus.R;
 import com.example.mopus.databinding.FragmentStatsBinding;
 
@@ -44,6 +45,8 @@ public class StatsFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d("QR CODE", "CLICKED");
+        Intent intent = new Intent(getActivity(), QrCodeActivity.class);
+        startActivity(intent);
         return super.onOptionsItemSelected(item);
     }
 

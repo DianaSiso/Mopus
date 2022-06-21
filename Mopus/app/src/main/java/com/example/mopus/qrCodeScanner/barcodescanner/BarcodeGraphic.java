@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode.barcodescanner;
+package com.example.mopus.qrCodeScanner.barcodescanner;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -24,8 +24,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import com.google.mlkit.vision.barcode.common.Barcode;
-import com.example.mopus.qrCode.GraphicOverlay;
-import com.example.mopus.qrCode.GraphicOverlay.Graphic;
+import com.example.mopus.qrCodeScanner.GraphicOverlay;
+import com.example.mopus.qrCodeScanner.GraphicOverlay.Graphic;
 
 /** Graphic instance for rendering Barcode position and content information in an overlay view. */
 public class BarcodeGraphic extends Graphic {

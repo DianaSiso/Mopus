@@ -158,5 +158,6 @@
     <string name="pref_title_segmentation_raw_size_mask" translatable="false">Enable raw size mask</string>
     <string name="pref_key_segmentation_raw_size_mask" translatable="false">srsm</string>
     <string name="action_create_qr">Create QR code</string>
+    <string name="qr_code">qr_code</string>
 
 </resources>

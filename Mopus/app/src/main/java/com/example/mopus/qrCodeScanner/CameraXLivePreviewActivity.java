@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.mopus.qrCode;
+package com.example.mopus.qrCodeScanner;
 
 import android.content.Context;
 import android.content.Intent;
@@ -52,10 +52,9 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions;
 import com.google.mlkit.vision.barcode.BarcodeScanning;
 import com.google.mlkit.vision.barcode.common.Barcode;
 import com.google.mlkit.vision.common.InputImage;
-import com.example.mopus.qrCode.preference.PreferenceUtils;
-import com.example.mopus.qrCode.preference.SettingsActivity;
+import com.example.mopus.qrCodeScanner.preference.PreferenceUtils;
+import com.example.mopus.qrCodeScanner.preference.SettingsActivity;
 
-import java.io.IOException;
 import java.util.List;
 
 /** Live preview demo app for ML Kit APIs using CameraX. */
