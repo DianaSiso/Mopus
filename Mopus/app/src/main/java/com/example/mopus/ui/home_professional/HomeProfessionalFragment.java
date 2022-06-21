@@ -150,8 +150,9 @@ public class HomeProfessionalFragment extends Fragment {
         public void onBindViewHolder(@NonNull ScansAdapter.ScansViewHolder holder, int position) {
             Scan mCurrent = scans.get(position);
             String userEmail = mCurrent.getUserEmail();
+            String date = mCurrent.getDateTime();
             holder.userView.setText(userEmail);
-            holder.dateView.setText(mCurrent.getDateTime());
+            holder.dateView.setText(date);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -169,6 +170,7 @@ public class HomeProfessionalFragment extends Fragment {
                         JSONObject scanKey = new JSONObject();
                         try {
                             scanKey.put("email", userEmail);
+                            scanKey.put("date", date);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();

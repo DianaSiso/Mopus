@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mopus.HomeActivity;
 import com.example.mopus.MainActivity;
@@ -49,19 +50,26 @@ public class ResultActivity extends AppCompatActivity {
 
         Intent data = getIntent();
 
+        Log.d(TAG, data.getStringExtra("key"));
+
         JSONObject mainObject;
 
         try {
-            mainObject = new JSONObject(data.getStringExtra("key"));
-            String emailItem = (String) mainObject.get( "email" );
-            //String priceItem = (String) mainObject.get( "price" );
-            //Log.e("TESTING",""+nameItem +priceItem);
-            getStats(emailItem);
-            text.setText(emailItem);
+            mainObject = new JSONObject(data.getStringExtra( "key" ));
+            String emailItem = mainObject.getString( "email" );
+            String day = mainObject.getString( "date" );
+            //String hour = (String) mainObject.get( "hour" );
 
-            // TODO: create Scan object and save it on the db BUT ONLY IF COMES FROM A NEW SCAN
+            getStats(emailItem, day/*, hour*/);
+            text.setText(emailItem + " - " + day + " - " /*+ hour*/);
+
+            if(mainObject.has("isNewScan")) {
+                // TODO: create Scan object and save it on the db BUT ONLY IF COMES FROM A NEW SCAN
+                Log.d(TAG, "NEW ACTIVITY");
+            }
         } catch (JSONException jsonException) {
             jsonException.printStackTrace();
+            Toast.makeText(this, "Somathing went wrong \n" + jsonException.toString(), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -72,8 +80,8 @@ public class ResultActivity extends AppCompatActivity {
         return true;
     }
 
-    private void getStats(String emailItem) {
-        db.collection("stats_water")
+    private void getStats(String emailItem, String day/*, String hour*/) {
+        db.collection("water")
                 .document(emailItem)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -91,5 +99,9 @@ public class ResultActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void createNewScan() {
+
     }
 }

@@ -16,6 +16,8 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,8 +43,15 @@ public class QrCodeActivity extends AppCompatActivity {
         JSONObject qrCodeKey = new JSONObject();
         try {
             qrCodeKey.put("email", email);
+            Date currentTime = Calendar.getInstance().getTime();
+            String[] temp = String.valueOf(currentTime).split(" ");
+            String day = temp[1] + " " + temp[2];
+            String hour = temp[3].substring(0,2);
+            qrCodeKey.put("date", day);
+            qrCodeKey.put("hour", hour);
+            qrCodeKey.put("isNewScan", true);
         } catch (JSONException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
         }
 
