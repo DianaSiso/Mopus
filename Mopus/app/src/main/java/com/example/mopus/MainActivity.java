@@ -47,15 +47,32 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         if(mAuth.getCurrentUser() != null) {
-            // TODO: handle the already login user
-            /*Intent intent = new Intent(Register.this, HomeActivity.class);
-            startActivity(intent);*/
+            db.collection("users")
+                    .whereEqualTo("id", mAuth.getCurrentUser().getUid())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                    Map<String, Object> user = document.getData();
+                                    Intent intent = new Intent(MainActivity.this, user.get("isProfessional").toString().equals("false") ? HomeActivity.class : ProfessionalActivity2.class);
+                                    startActivity(intent);
+                                }
+                            } else {
+                                Log.w(TAG, "Error getting documents.", task.getException());
+                            }
+                        }
+                    });
         }
     }
 
     public void clickToSignUp(View view) {
         Intent intent = new Intent(this, Register.class);
         startActivity(intent);
+        /*emailText.setText("");
+        passwordText.setText("");*/
     }
 
     public void clickToSignIn(View view) {
@@ -81,13 +98,7 @@ public class MainActivity extends AppCompatActivity {
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
 
                                                     Map<String, Object> user = document.getData();
-                                                    Intent intent;
-
-                                                    if(user.get("isProfessional").toString().equals("false")) {
-                                                        intent = new Intent(MainActivity.this, HomeActivity.class);
-                                                    } else {
-                                                        intent = new Intent(MainActivity.this, ProfessionalActivity.class);
-                                                    }
+                                                    Intent intent = new Intent(MainActivity.this, user.get("isProfessional").toString().equals("false") ? HomeActivity.class : ProfessionalActivity2.class);
                                                     startActivity(intent);
                                                 }
                                             } else {
@@ -104,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+       /* emailText.setText("");
+        passwordText.setText("");*/
 
     }
 

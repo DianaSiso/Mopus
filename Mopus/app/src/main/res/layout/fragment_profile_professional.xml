@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f7f2ea"
+    android:padding="30dp"
+    tools:context=".ui.profile_professional.ProfileProfessionalFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/profile_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:autofillHints=""
+                android:background="#F9EBD4"
+                android:backgroundTint="#F9EBD4"
+                android:clickable="true"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/first_name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:onClick="clickToChangeInfo"
+                android:padding="5dp"
+                android:textColorHint="#907862"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/profile_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:autofillHints=""
+                android:background="#f9ebd4"
+                android:backgroundTint="#f9ebd4"
+                android:clickable="true"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/last_name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:onClick="clickToChangeInfo"
+                android:padding="5dp"
+                android:textColorHint="#907862"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/profile_birth_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:autofillHints=""
+                android:background="#f9ebd4"
+                android:clickable="true"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/birth_date"
+                android:inputType="date"
+                android:minHeight="48dp"
+                android:onClick="clickToChangeInfo"
+                android:padding="5dp"
+                android:textColorHint="#907862"
+                android:visibility="visible"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/profile_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:autofillHints=""
+                android:background="#f9ebd4"
+                android:backgroundTint="#f9ebd4"
+                android:clickable="true"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:minHeight="48dp"
+                android:onClick="clickToChangeInfo"
+                android:padding="5dp"
+                android:textColorHint="#907862"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/profile_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:autofillHints=""
+                android:background="#f9ebd4"
+                android:backgroundTint="#f9ebd4"
+                android:clickable="true"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
+                android:onClick="clickToChangeInfo"
+                android:padding="5dp"
+                android:textColorHint="#907862"
+                tools:ignore="TextContrastCheck" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/change_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#ecbeb4"
+                    android:gravity="center|center_vertical"
+                    android:hint="@string/change_password"
+                    android:onClick="clickToChangePassword"
+                    android:textColor="#555"
+                    tools:ignore="TextContrastCheck" />
+
+                <Button
+                    android:id="@+id/sign_out_professional"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#444444"
+                    android:gravity="center|center_vertical"
+                    android:hint="@string/action_sign_out"
+                    android:onClick="logoutProfessional"
+                    android:textColor="#eeeeee"
+                    android:textColorHint="#eeeeee"
+                    tools:ignore="TextContrastCheck" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
