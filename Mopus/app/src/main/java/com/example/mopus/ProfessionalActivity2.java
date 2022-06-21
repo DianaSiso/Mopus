@@ -24,7 +24,7 @@ public class ProfessionalActivity2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (BuildConfig.DEBUG) {
+        /*if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(
                     new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
             StrictMode.setVmPolicy(
@@ -33,7 +33,7 @@ public class ProfessionalActivity2 extends AppCompatActivity {
                             .detectLeakedClosableObjects()
                             .penaltyLog()
                             .build());
-        }
+        }*/
 
         super.onCreate(savedInstanceState);
 

@@ -86,6 +86,9 @@ public final class CameraXLivePreviewActivity extends AppCompatActivity
     super.onCreate(savedInstanceState);
     Log.d(TAG, "onCreate");
 
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setDisplayShowHomeEnabled(true);
+
     if (savedInstanceState != null) {
       selectedModel = savedInstanceState.getString(STATE_SELECTED_MODEL, BARCODE_SCANNING);
     }
@@ -127,6 +130,12 @@ public final class CameraXLivePreviewActivity extends AppCompatActivity
               SettingsActivity.LaunchSource.CAMERAX_LIVE_PREVIEW);
           startActivity(intent);
         });
+  }
+
+  @Override
+  public boolean onSupportNavigateUp() {
+    onBackPressed();
+    return true;
   }
 
   @Override
