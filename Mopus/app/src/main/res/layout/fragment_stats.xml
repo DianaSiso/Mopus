@@ -46,7 +46,12 @@
                     android:background="#FF9B9B"
                     android:onClick="clickToSearchDay"
                     android:text="@string/action_search" />
+
             </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barchart"

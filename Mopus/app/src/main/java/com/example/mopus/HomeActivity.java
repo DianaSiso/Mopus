@@ -155,25 +155,24 @@ public class HomeActivity extends AppCompatActivity {
                                     + ", Value = "
                                     + entry.getValue());
 
-                        Log.d("ARRAY", String.valueOf(sorted));
-
+                        Log.d("Sorted", String.valueOf(sorted));
                         ArrayList<BarEntry> barArrayList = new ArrayList<>();
 
                         for (int i=0; i< sorted.size();i++) {
-                            Log.d("lxlx:", String.valueOf(sorted.get(i)));
-                            if (sorted.get(i) != null) {
-                                barArrayList.add(new BarEntry(Float.parseFloat(String.valueOf(i+1)), Float.parseFloat(sorted.get(i))));
-                            }
-                        }
-                        Log.d("DDDD", String.valueOf(barArrayList));
+                            Log.d("lxlx:", String.valueOf(sorted.keySet().toArray()[i]));
+                            Log.d("lxlx:", String.valueOf(sorted.get(sorted.keySet().toArray()[i])));
+                            barArrayList.add(new BarEntry(Float.parseFloat(String.valueOf(sorted.keySet().toArray()[i])), Float.parseFloat(sorted.get(sorted.keySet().toArray()[i]))));
 
-                        BarDataSet barDataSet = new BarDataSet(barArrayList, "water per day");
+                        }
+
+                        BarDataSet barDataSet = new BarDataSet(barArrayList, month);
                         BarData barData = new BarData(barDataSet);
                         barChart.setData(barData);
-                        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+                        barDataSet.setColor(Color.GRAY);
                         barDataSet.setValueTextColor(Color.BLACK);
-                        barDataSet.setValueTextSize((16f));
-                        barChart.getDescription().setEnabled(true);
+                        barDataSet.setValueTextSize((8f));
+                        barChart.setNoDataText("Click here!");
+                        barChart.getDescription().setEnabled(false);
 
                     }
                 } else {
