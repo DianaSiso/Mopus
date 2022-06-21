@@ -46,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        Log.d(TAG, "onStart");
+
         if(mAuth.getCurrentUser() != null) {
+            Log.d(TAG, "USER NOT NULL");
             db.collection("users")
                     .whereEqualTo("id", mAuth.getCurrentUser().getUid())
                     .get()
@@ -56,8 +59,11 @@ public class MainActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
 
+                                    String email = (String) document.getData().get("email");
                                     Map<String, Object> user = document.getData();
                                     Intent intent = new Intent(MainActivity.this, user.get("isProfessional").toString().equals("false") ? HomeActivity.class : ProfessionalActivity2.class);
+                                    intent.putExtra("email", email);
+
                                     startActivity(intent);
                                 }
                             } else {
@@ -79,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         String email = emailText.getText().toString().trim();
         String password = passwordText.getText().toString().trim();
 
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -98,7 +105,10 @@ public class MainActivity extends AppCompatActivity {
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
 
                                                     Map<String, Object> user = document.getData();
+                                                    Log.d(TAG, user.get("isProfessional").toString());
                                                     Intent intent = new Intent(MainActivity.this, user.get("isProfessional").toString().equals("false") ? HomeActivity.class : ProfessionalActivity2.class);
+                                                    intent.putExtra("email", email);
+
                                                     startActivity(intent);
                                                 }
                                             } else {
