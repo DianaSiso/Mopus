@@ -69,7 +69,7 @@ public class ResultActivity extends AppCompatActivity {
             }
         } catch (JSONException jsonException) {
             jsonException.printStackTrace();
-            Toast.makeText(this, "Somathing went wrong \n" + jsonException.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Something went wrong \n", Toast.LENGTH_SHORT).show();
         }
 
     }

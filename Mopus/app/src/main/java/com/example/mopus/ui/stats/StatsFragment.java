@@ -1,6 +1,5 @@
 package com.example.mopus.ui.stats;
 
-import android.graphics.Color;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -22,19 +20,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.mopus.QrCodeActivity;
 import com.example.mopus.R;
 import com.example.mopus.databinding.FragmentStatsBinding;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
 
 public class StatsFragment extends Fragment {
 
