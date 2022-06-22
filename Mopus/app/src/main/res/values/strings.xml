@@ -34,6 +34,7 @@
     <string name="add_water">Add Cup</string>
     <string name="action_search">Search</string>
     <string name="graph_water_per_day">Water per Day</string>
+    <string name="graph_water_per_hour">Water per Hour</string>
 
     <string-array name="months">
         <item>Jan</item>
