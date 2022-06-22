@@ -8,6 +8,12 @@ This project was developed in the context of [Introduction To Mobile Computing](
 
 ## How to run
 
+### Logins
+|Account type|Email|Password|
+|------------|-----|--------|
+|professional|louro@gmail.com|password|
+|regular|jdepp@ua.pt|password|
+
 ## Documentation
 
 ## Authors
