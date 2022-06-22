@@ -54,6 +54,16 @@ public class StatsFragment extends Fragment {
         adapter_months.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner_months.setAdapter(adapter_months);
 
+        Spinner spinner_hours_months= binding.spinnerHoursMonth;
+        ArrayAdapter<CharSequence> adapter_hours_months=ArrayAdapter.createFromResource(getContext(), R.array.months, android.R.layout.simple_spinner_item);
+        adapter_hours_months.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner_hours_months.setAdapter(adapter_hours_months);
+
+        Spinner spinner_hours_days= binding.spinnerHoursDay;
+        ArrayAdapter<CharSequence> adapter_hours_days=ArrayAdapter.createFromResource(getContext(), R.array.days, android.R.layout.simple_spinner_item);
+        adapter_hours_days.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner_hours_days.setAdapter(adapter_hours_days);
+
         setHasOptionsMenu(true);
 
         return root;
