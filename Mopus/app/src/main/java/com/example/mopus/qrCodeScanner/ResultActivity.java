@@ -51,7 +51,6 @@ public class ResultActivity extends AppCompatActivity {
     private String date;
     private String monthScan;
     private String numberDay;
-    private boolean isNewScan;
 
     private TextView userWeight;
     private TextView userHeight;
@@ -103,11 +102,8 @@ public class ResultActivity extends AppCompatActivity {
 
             getStats();
 
-            isNewScan = mainObject.has("isNewScan");
-
-            if(isNewScan) {
+            if(mainObject.has("isNewScan")) {
                 saveNewScan();
-                isNewScan = false;
             }
 
             Log.d(TAG, "NEW ACTIVITY");
