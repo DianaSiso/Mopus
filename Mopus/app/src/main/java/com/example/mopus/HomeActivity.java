@@ -43,6 +43,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -129,6 +130,74 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    public void clickToRegisterMenstruation(View view) {
+        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        Log.d("MonthCalendar", String.valueOf(month));
+
+        String monthDB = "Jun";
+        switch (month) {
+            case 1:
+                monthDB = "Jan";
+                break;
+            case 2:
+                monthDB = "Feb";
+                break;
+            case 3:
+                monthDB = "Mar";
+                break;
+            case 4:
+                monthDB = "Apr";
+                break;
+            case 5:
+                monthDB = "May";
+                break;
+            case 6:
+                monthDB = "Jun";
+                break;
+            case 7:
+                monthDB = "July";
+                break;
+            case 8:
+                monthDB = "Aug";
+                break;
+            case 9:
+                monthDB = "Sept";
+                break;
+            case 10:
+                monthDB = "Oct";
+                break;
+            case 11:
+                monthDB = "Nov";
+                break;
+            case 12:
+                monthDB = "Dec";
+                break;
+        }
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docIdRef = db.collection("menstruation").document(email);
+        String finalMonthDB = monthDB;
+        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("Getting data from DB", "... Complete.");
+                        ArrayList<Double> m = (ArrayList<Double>) document.getData().get(finalMonthDB);
+                        if (String.valueOf(m).equals("null")) {
+                            // ainda não existe info na db
+                            ArrayList<Integer> day = new ArrayList<>();
+                            day.add(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+                            db.collection("menstruation").document(email)
+                                    .update(finalMonthDB, day);
+                        }
+                    }
+                } else {
+                    Log.d(email, "Failed with: ", task.getException());
+                }
+            }
+        });
+    }
     
     public void clickToSearchHours(View view) {
         TreeMap<Integer, String> sorted = new TreeMap<Integer, String>();

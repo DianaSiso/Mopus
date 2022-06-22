@@ -1,41 +1,18 @@
-package com.example.mopus.model;
+package com.example.mopus.service;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.IBinder;
-import android.os.SystemClock;
-import android.provider.Settings;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.example.mopus.AlarmReceiver;
-import com.example.mopus.DrinkWater;
-import com.example.mopus.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.mopus.receiver.AlarmReceiver;
 
 import java.util.Calendar;
-import java.util.Date;
-
-import javax.annotation.Nullable;
 
 public class WaterStatsService extends Service {
     private MediaPlayer player;

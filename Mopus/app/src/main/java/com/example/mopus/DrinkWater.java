@@ -5,11 +5,8 @@ package com.example.mopus;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mopus.model.WaterStats;
-import com.example.mopus.model.WaterStatsService;
+import com.example.mopus.service.WaterStatsService;
 import com.example.mopus.model.WaterTime;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

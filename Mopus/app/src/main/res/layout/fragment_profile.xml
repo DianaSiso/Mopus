@@ -178,7 +178,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:text="@string/menstrual_cycle_disable" />
+                android:text="@string/menstrual_cycle_disable"
+                android:visibility="invisible" />
 
             <LinearLayout
                 android:layout_width="match_parent"
