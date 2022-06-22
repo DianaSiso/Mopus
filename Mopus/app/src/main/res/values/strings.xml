@@ -85,6 +85,40 @@
         <item>1000ml</item>
     </string-array>
 
+    <string-array name="days">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+
     <string-array name="hours">
         <item>01</item>
         <item>02</item>
@@ -111,6 +145,7 @@
         <item>23</item>
         <item>24</item>
     </string-array>
+
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -123,10 +158,9 @@
     <string name="title_activity_professional2">ProfessionalActivity2</string>
     <string name="title_analysis">Analysis</string>
 
-    <!-- QR Code-->
-    <string name="ok" translatable="false">OK</string>
+    <!-- QR Code--><string name="ok" translatable="false">OK</string>
     <string name="permission_camera_rationale" translatable="false">Access to the camera is needed for detection</string>
-    <string name="no_camera_permission" translatable="false">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="no_camera_permission" translatable="false">This application cannot run because it does not have the camera permission. The application will now exit.</string>
     <string name="low_storage_error" translatable="false">Face detector dependencies cannot be downloaded due to low device storage</string>
     <string name="toggle_turn_on" translatable="false">Front</string>
     <string name="toggle_turn_off" translatable="false">Back</string>
@@ -177,5 +211,4 @@
     <string name="pref_key_segmentation_raw_size_mask" translatable="false">srsm</string>
     <string name="action_create_qr">Create QR code</string>
     <string name="qr_code">qr_code</string>
-
 </resources>
