@@ -60,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(MainActivity.this, user.get("isProfessional").toString().equals("false") ? HomeActivity.class : ProfessionalActivity2.class);
                                     intent.putExtra("email", email);
 
+                                    try {
+                                        intent.putExtra("hasMenstrualCycle", user.get("hasMenstrualCycle").toString().equals("true") ? true : false);
+                                    } catch(Exception e) {
+                                        intent.putExtra("hasMenstrualCycle", false);
+                                    }
+
                                     startActivity(intent);
                                 }
                             } else {
@@ -104,6 +110,12 @@ public class MainActivity extends AppCompatActivity {
                                                     Log.d(TAG, user.get("isProfessional").toString());
                                                     Intent intent = new Intent(MainActivity.this, user.get("isProfessional").toString().equals("false") ? HomeActivity.class : ProfessionalActivity2.class);
                                                     intent.putExtra("email", email);
+
+                                                    try {
+                                                        intent.putExtra("hasMenstrualCycle", user.get("hasMenstrualCycle").toString().equals("true") ? true : false);
+                                                    } catch(Exception e) {
+                                                        intent.putExtra("hasMenstrualCycle", false);
+                                                    }
 
                                                     startActivity(intent);
                                                 }

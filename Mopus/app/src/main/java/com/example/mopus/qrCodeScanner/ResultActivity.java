@@ -40,6 +40,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -64,21 +65,6 @@ public class ResultActivity extends AppCompatActivity {
 
         userWeight = findViewById(R.id.user_weight);
         userHeight = findViewById(R.id.user_height);
-
-        Spinner spinner_months= findViewById(R.id.spinner_months);
-        ArrayAdapter<CharSequence> adapter_months=ArrayAdapter.createFromResource(this, R.array.months, android.R.layout.simple_spinner_item);
-        adapter_months.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        spinner_months.setAdapter(adapter_months);
-
-        Spinner spinner_hours_months= findViewById(R.id.spinner_hours_month);
-        ArrayAdapter<CharSequence> adapter_hours_months=ArrayAdapter.createFromResource(this, R.array.months, android.R.layout.simple_spinner_item);
-        adapter_hours_months.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        spinner_hours_months.setAdapter(adapter_hours_months);
-
-        Spinner spinner_hours_days= findViewById(R.id.spinner_hours_day);
-        ArrayAdapter<CharSequence> adapter_hours_days=ArrayAdapter.createFromResource(this, R.array.days, android.R.layout.simple_spinner_item);
-        adapter_hours_days.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        spinner_hours_days.setAdapter(adapter_hours_days);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -112,6 +98,21 @@ public class ResultActivity extends AppCompatActivity {
             jsonException.printStackTrace();
             Toast.makeText(this, "Something went wrong \n", Toast.LENGTH_SHORT).show();
         }
+
+        Spinner spinner_months= findViewById(R.id.spinner_months);
+        ArrayAdapter<CharSequence> adapter_months = new ArrayAdapter(this, android.R.layout.simple_spinner_item, months());
+        adapter_months.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner_months.setAdapter(adapter_months);
+
+        Spinner spinner_hours_months= findViewById(R.id.spinner_hours_month);
+        ArrayAdapter<CharSequence> adapter_hours_months = new ArrayAdapter(this, android.R.layout.simple_spinner_item, months());
+        adapter_hours_months.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner_hours_months.setAdapter(adapter_hours_months);
+
+        Spinner spinner_hours_days= findViewById(R.id.spinner_hours_day);
+        ArrayAdapter<CharSequence> adapter_hours_days=ArrayAdapter.createFromResource(this, R.array.days, android.R.layout.simple_spinner_item);
+        adapter_hours_days.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner_hours_days.setAdapter(adapter_hours_days);
 
     }
 
@@ -196,10 +197,7 @@ public class ResultActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d("Getting data from DB", "... Complete.");
                         HashMap<String, HashMap<String, Double>> sph = (HashMap<String, HashMap<String, Double>>) document.getData().get("stats_per_hour");
-                        Log.d("Value", String.valueOf(sph.keySet())); //temos todos os dias que existem e estão registados na db
-                        Log.d("Value 2", String.valueOf(sph));
 
                         for (String days : sph.keySet()) {
                             if (days.contains(month) && days.contains(day)) { //então é o dia que queremos!
@@ -223,12 +221,9 @@ public class ResultActivity extends AppCompatActivity {
                                     + ", Value = "
                                     + entry.getValue());
 
-                        Log.d("Sorted", String.valueOf(sorted));
                         ArrayList<BarEntry> barArrayList = new ArrayList<>();
 
                         for (int i=0; i< sorted.size();i++) {
-                            Log.d("lxlx:", String.valueOf(sorted.keySet().toArray()[i]));
-                            Log.d("lxlx:", String.valueOf(sorted.get(sorted.keySet().toArray()[i])));
                             barArrayList.add(new BarEntry(Float.parseFloat(String.valueOf(sorted.keySet().toArray()[i])), Float.parseFloat(sorted.get(sorted.keySet().toArray()[i]))));
 
                         }
@@ -239,14 +234,13 @@ public class ResultActivity extends AppCompatActivity {
                         barDataSet.setColor(Color.GRAY);
                         barDataSet.setValueTextColor(Color.BLACK);
                         barDataSet.setValueTextSize((0f));
-                        barChart.setNoDataText("Click here!");
                         barChart.getDescription().setEnabled(false);
 
-                        Log.d("AAAAAAAA", String.valueOf(values_per_hour));
-                        if (values_per_hour.size() > 1) {
+                        if (values_per_hour.size() > 0) {
                             barChart.setVisibility(View.VISIBLE);
                         } else {
                             barChart.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getApplicationContext(), "There's no data available", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -278,7 +272,6 @@ public class ResultActivity extends AppCompatActivity {
 
                         for (String day : spd.keySet()) {
                             String[] days = day.split(" ");
-                            Log.d("DAY_DEBUG", days[1] + " - " + numberDay + ": " + ((Integer.parseInt(days[1]) < Integer.parseInt(numberDay) & day.contains(monthScan)) ? "menor" : "maior"));
                             if (day.contains(month)) {
                                 if((day.contains(monthScan) && Integer.parseInt(days[1]) < Integer.parseInt(numberDay)) || !day.contains(monthScan)) {
                                     values_per_day.put( Integer.parseInt(day.replace(month + " ", "")), String.valueOf(spd.get(day)));
@@ -299,8 +292,6 @@ public class ResultActivity extends AppCompatActivity {
                         ArrayList<BarEntry> barArrayList = new ArrayList<>();
 
                         for (int i=0; i< sorted.size();i++) {
-                            Log.d("lxlx:", String.valueOf(sorted.keySet().toArray()[i]));
-                            Log.d("lxlx:", String.valueOf(sorted.get(sorted.keySet().toArray()[i])));
                             barArrayList.add(new BarEntry(Float.parseFloat(String.valueOf(sorted.keySet().toArray()[i])), Float.parseFloat(sorted.get(sorted.keySet().toArray()[i]))));
 
                         }
@@ -318,6 +309,7 @@ public class ResultActivity extends AppCompatActivity {
                             barChart.setVisibility(View.VISIBLE);
                         } else {
                             barChart.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getApplicationContext(), "There's no data available", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -326,5 +318,115 @@ public class ResultActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private List<CharSequence> months() {
+        List<CharSequence> listMonth = new ArrayList<CharSequence>();
+        switch(monthScan) {
+            case "Jan":
+                listMonth.add("Jan");
+                break;
+            case "Fev":
+                listMonth.add("Jan");
+                listMonth.add("Fev");
+                break;
+            case "Mar":
+                listMonth.add("Jan");
+                listMonth.add("Fev");
+                listMonth.add("Mar");
+                break;
+            case "Apr":
+                listMonth.add("Jan");
+                listMonth.add("Fev");
+                listMonth.add("Mar");
+                listMonth.add("Apr");
+                break;
+            case "May":
+                listMonth.add("Jan");
+                listMonth.add("Fev");
+                listMonth.add("Mar");
+                listMonth.add("Apr");
+                listMonth.add("May");
+                break;
+            case "Jun":
+                listMonth.add("Jan");
+                listMonth.add("Fev");
+                listMonth.add("Mar");
+                listMonth.add("Apr");
+                listMonth.add("May");
+                listMonth.add("Jun");
+                break;
+            case "Jul":
+                listMonth.add("Jan");
+                listMonth.add("Fev");
+                listMonth.add("Mar");
+                listMonth.add("Apr");
+                listMonth.add("May");
+                listMonth.add("Jun");
+                listMonth.add("Jul");
+                break;
+            case "Aug":
+                listMonth.add("Jan");
+                listMonth.add("Fev");
+                listMonth.add("Mar");
+                listMonth.add("Apr");
+                listMonth.add("May");
+                listMonth.add("Jun");
+                listMonth.add("Jul");
+                listMonth.add("Aug");
+                break;
+            case "Sep":
+                listMonth.add("Jan");
+                listMonth.add("Fev");
+                listMonth.add("Mar");
+                listMonth.add("Apr");
+                listMonth.add("May");
+                listMonth.add("Jun");
+                listMonth.add("Jul");
+                listMonth.add("Aug");
+                listMonth.add("Sep");
+                break;
+            case "Oct":
+                listMonth.add("Jan");
+                listMonth.add("Fev");
+                listMonth.add("Mar");
+                listMonth.add("Apr");
+                listMonth.add("May");
+                listMonth.add("Jun");
+                listMonth.add("Jul");
+                listMonth.add("Aug");
+                listMonth.add("Sep");
+                listMonth.add("Oct");
+                break;
+            case "Nov":
+                listMonth.add("Jan");
+                listMonth.add("Fev");
+                listMonth.add("Mar");
+                listMonth.add("Apr");
+                listMonth.add("May");
+                listMonth.add("Jun");
+                listMonth.add("Jul");
+                listMonth.add("Aug");
+                listMonth.add("Sep");
+                listMonth.add("Oct");
+                listMonth.add("Nov");
+                break;
+            case "Dec":
+                listMonth.add("Jan");
+                listMonth.add("Fev");
+                listMonth.add("Mar");
+                listMonth.add("Apr");
+                listMonth.add("May");
+                listMonth.add("Jun");
+                listMonth.add("Jul");
+                listMonth.add("Aug");
+                listMonth.add("Sep");
+                listMonth.add("Oct");
+                listMonth.add("Nov");
+                listMonth.add("Dec");
+                break;
+        }
+
+        return listMonth;
     }
 }

@@ -28,6 +28,7 @@ public class ProfileViewModel extends ViewModel {
     private MutableLiveData<String> weight;
     private MutableLiveData<String> height;
     private MutableLiveData<String> imc;
+    private MutableLiveData<Boolean> hasMenstrualCycle;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -50,6 +51,7 @@ public class ProfileViewModel extends ViewModel {
         weight = new MutableLiveData<>();
         height = new MutableLiveData<>();
         imc = new MutableLiveData<>();
+        hasMenstrualCycle = new MutableLiveData<>();
         email.setValue(mAuth.getCurrentUser().getEmail());
 
         db.collection("users")
@@ -70,6 +72,11 @@ public class ProfileViewModel extends ViewModel {
                                 weight.setValue(String.valueOf(user.get("weight")));
                                 height.setValue(String.valueOf(user.get("height")));
                                 imc.setValue(String.valueOf(user.get("imc")));
+                                try {
+                                    hasMenstrualCycle.setValue(!(Boolean) user.get("hasMenstrualCycle"));
+                                } catch(Exception e) {
+                                    hasMenstrualCycle.setValue(true);
+                                }
                                 break;
                             }
                         } else {
@@ -95,5 +102,9 @@ public class ProfileViewModel extends ViewModel {
     public LiveData<String> getPhoneNumber() { return phoneNumber; }
 
     public LiveData<String> getEmail() { return email; }
+
     public LiveData<String> getIMC() { return imc; }
+
+    public MutableLiveData<Boolean> hasMenstrualCycle() { return hasMenstrualCycle; };
+
 }

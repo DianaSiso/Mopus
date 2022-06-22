@@ -12,10 +12,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mopus.model.WaterTime;
+import com.example.mopus.ui.profile.ProfileViewModel;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -31,6 +33,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -41,6 +44,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,15 +60,13 @@ public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
     private int progr = 0;
     private String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private FirebaseAuth mAuth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mAuth = FirebaseAuth.getInstance();
 
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -73,8 +76,13 @@ public class HomeActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home,  R.id.navigation_hiking_map, R.id.navigation_menstrual_cycle, R.id.navigation_profile, R.id.navigation_stats)
-                .build();
+                .build();;
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
+        boolean hasMenstrualCycle = getIntent().getBooleanExtra("hasMenstrualCycle", false);
+        if(!hasMenstrualCycle) {
+            navView.getMenu().findItem(R.id.navigation_menstrual_cycle).setVisible(false);
+            navView.getMenu().findItem(R.id.navigation_menstrual_cycle).setVisible(false);
+        }
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
@@ -200,6 +208,7 @@ public class HomeActivity extends AppCompatActivity {
                             barChart.setVisibility(View.VISIBLE);
                         } else {
                             barChart.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getApplicationContext(), "There's no data available", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -272,6 +281,7 @@ public class HomeActivity extends AppCompatActivity {
                             barChart.setVisibility(View.VISIBLE);
                         } else {
                             barChart.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getApplicationContext(), "There's no data available", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -415,6 +425,19 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void menstrualCycle(View view) {
+        ProfileViewModel profileViewModel =
+                new ViewModelProvider(this, (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(ProfileViewModel.class);
+        Switch hasMenstrualCycleSwitch = findViewById(R.id.menstrual_cycle_disable);
+        profileViewModel.hasMenstrualCycle().setValue(hasMenstrualCycleSwitch.isChecked());
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        if(hasMenstrualCycleSwitch.isChecked()) {
+            navView.getMenu().findItem(R.id.navigation_menstrual_cycle).setVisible(false);
+        } else {
+            navView.getMenu().findItem(R.id.navigation_menstrual_cycle).setVisible(true);
+        }
     }
 
 }

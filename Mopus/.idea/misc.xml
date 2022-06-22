@@ -3,21 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
-        <entry key="..\:/Users/Utilizador/Documents/Universidade/3 ano/ICM/Android/Mopus/Mopus/app/src/main/res/layout/activity_home.xml" value="0.15625" />
-        <entry key="..\:/Users/Utilizador/Documents/Universidade/3 ano/ICM/Android/Mopus/Mopus/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/Utilizador/Documents/Universidade/3 ano/ICM/Android/Mopus/Mopus/app/src/main/res/layout/activity_professional2.xml" value="0.22" />
-        <entry key="..\:/Users/Utilizador/Documents/Universidade/3 ano/ICM/Android/Mopus/Mopus/app/src/main/res/layout/fragment_home_professional.xml" value="0.22" />
-        <entry key="..\:/Users/Utilizador/Documents/Universidade/3 ano/ICM/Android/Mopus/Mopus/app/src/main/res/layout/last_scans_item.xml" value="0.22" />
-        <entry key="..\:/Users/diana/Desktop/Mopus/Mopus/app/src/main/res/layout/activity_change_info.xml" value="0.12291666666666666" />
-        <entry key="..\:/Users/diana/Desktop/Mopus/Mopus/app/src/main/res/layout/fragment_home.xml" value="0.12291666666666666" />
-        <entry key="..\:/Users/diana/Desktop/Mopus/Mopus/app/src/main/res/layout/fragment_profile.xml" value="0.12291666666666666" />
-=======
+        <entry key="..\:/Users/Utilizador/Documents/Universidade/3 ano/ICM/Android/Mopus/Mopus/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Utilizador/Documents/Universidade/3 ano/ICM/Android/Mopus/Mopus/app/src/main/res/layout/activity_result.xml" value="0.2143845089903181" />
+        <entry key="..\:/Users/Utilizador/Documents/Universidade/3 ano/ICM/Android/Mopus/Mopus/app/src/main/res/layout/fragment_profile.xml" value="0.18" />
         <entry key="..\:/Users/Utilizador/Documents/Universidade/3 ano/ICM/Android/Mopus/Mopus/app/src/main/res/layout/fragment_stats.xml" value="0.11041666666666666" />
->>>>>>> 75221f715dd6d140a2946d7bfa9b771e3621f97b
+        <entry key="..\:/Users/Utilizador/Documents/Universidade/3 ano/ICM/Android/Mopus/Mopus/app/src/main/res/menu/bottom_nav_menu_with_cycle.xml" value="0.11302083333333333" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

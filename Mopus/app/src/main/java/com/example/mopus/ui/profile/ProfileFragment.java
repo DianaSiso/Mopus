@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ public class ProfileFragment extends Fragment {
     private TextView phoneNumber;
     private TextView email;
     private TextView imc;
+    private Switch hasMenstrualCycleSwitch;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,6 +46,7 @@ public class ProfileFragment extends Fragment {
         phoneNumber = binding.profilePhoneNumber;
         email = binding.profileEmail;
         imc = binding.profileImc;
+        hasMenstrualCycleSwitch = binding.menstrualCycleDisable;
 
         profileViewModel.getFirstName().observe(getViewLifecycleOwner(), firstName::setText);
         profileViewModel.getLastName().observe(getViewLifecycleOwner(), lastName::setText);
@@ -51,7 +54,7 @@ public class ProfileFragment extends Fragment {
         profileViewModel.getPhoneNumber().observe(getViewLifecycleOwner(), phoneNumber::setText);
         profileViewModel.getEmail().observe(getViewLifecycleOwner(), email::setText);
         profileViewModel.getIMC().observe(getViewLifecycleOwner(), imc::setText);
-
+        profileViewModel.hasMenstrualCycle().observe(getViewLifecycleOwner(), hasMenstrualCycleSwitch::setChecked);
 
         return root;
     }
