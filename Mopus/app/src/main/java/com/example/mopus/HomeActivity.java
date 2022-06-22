@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -89,11 +90,16 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+
     public void clickToChangeInfo(View view) {
         Log.d("clickID", String.valueOf(view.getId()));
         Integer id = view.getId();
         String from = "";
         switch (id) {
+            case R.id.profile_imc:
+                from = "imc";
+                break;
             case R.id.profile_first_name:
                 from = "first_name";
                 break;
@@ -190,7 +196,7 @@ public class HomeActivity extends AppCompatActivity {
                         barChart.getDescription().setEnabled(false);
 
                         Log.d("AAAAAAAA", String.valueOf(values_per_hour));
-                        if (values_per_hour.size() > 1) {
+                        if (values_per_hour.size() > 0) {
                             barChart.setVisibility(View.VISIBLE);
                         } else {
                             barChart.setVisibility(View.INVISIBLE);
@@ -262,7 +268,7 @@ public class HomeActivity extends AppCompatActivity {
                         barChart.setNoDataText("Click here!");
                         barChart.getDescription().setEnabled(false);
 
-                        if (values_per_day.size() > 1) {
+                        if (values_per_day.size() > 0) {
                             barChart.setVisibility(View.VISIBLE);
                         } else {
                             barChart.setVisibility(View.INVISIBLE);

@@ -10,18 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-/*import com.example.mopus.HomeActivity;
-import com.example.mopus.MainActivity;
-import com.example.mopus.ProfessionalActivity2;*/
 import com.example.mopus.databinding.FragmentProfileProfessionalBinding;
-/*import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task*/;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-/*import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.Map;*/
 
 public class ProfileProfessionalFragment extends Fragment {
 
