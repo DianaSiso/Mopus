@@ -123,12 +123,90 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    
+    public void clickToSearchHours(View view) {
+        TreeMap<Integer, String> sorted = new TreeMap<Integer, String>();
+        BarChart barChart = findViewById(R.id.barchart2);
 
+        Spinner mySpinner_1 = findViewById(R.id.spinner_hours_day);
+        Spinner mySpinner_2 = findViewById(R.id.spinner_hours_month);
+        String month = mySpinner_2.getSelectedItem().toString();
+        String day = mySpinner_1.getSelectedItem().toString();
+        final HashMap<Integer, String> values_per_hour = new HashMap<>();
+
+        DocumentReference docIdRef = db.collection("water").document(email);
+        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("Getting data from DB", "... Complete.");
+                        HashMap<String, HashMap<String, Double>> sph = (HashMap<String, HashMap<String, Double>>) document.getData().get("stats_per_hour");
+                        Log.d("Value", String.valueOf(sph.keySet())); //temos todos os dias que existem e estão registados na db
+                        Log.d("Value 2", String.valueOf(sph));
+
+                        for (String days : sph.keySet()) {
+                            if (days.contains(month) && days.contains(day)) { //então é o dia que queremos!
+                                Log.d("Value 3", String.valueOf(sph.get(days)));
+                                for (String str : sph.get(days).keySet()) {
+                                    // Log.d("Value 4", String.valueOf(sph.get(days).get(str)));
+                                    // Log.d("Value 4",str);
+                                    values_per_hour.put(Integer.parseInt(str), String.valueOf(sph.get(days).get(str)));
+                                }
+                            }
+                        }
+
+                        Log.d("Value 5", String.valueOf(values_per_hour));
+
+                        TreeMap<Integer, String> sorted = new TreeMap<Integer, String> (values_per_hour);
+
+                        // Display the TreeMap which is naturally sorted
+                        for (Map.Entry<Integer, String> entry :
+                                sorted.entrySet())
+                            System.out.println("Key = " + entry.getKey()
+                                    + ", Value = "
+                                    + entry.getValue());
+
+                        Log.d("Sorted", String.valueOf(sorted));
+                        ArrayList<BarEntry> barArrayList = new ArrayList<>();
+
+                        for (int i=0; i< sorted.size();i++) {
+                            Log.d("lxlx:", String.valueOf(sorted.keySet().toArray()[i]));
+                            Log.d("lxlx:", String.valueOf(sorted.get(sorted.keySet().toArray()[i])));
+                            barArrayList.add(new BarEntry(Float.parseFloat(String.valueOf(sorted.keySet().toArray()[i])), Float.parseFloat(sorted.get(sorted.keySet().toArray()[i]))));
+
+                        }
+
+                        BarDataSet barDataSet = new BarDataSet(barArrayList, month + " " + day);
+                        BarData barData = new BarData(barDataSet);
+                        barChart.setData(barData);
+                        barDataSet.setColor(Color.GRAY);
+                        barDataSet.setValueTextColor(Color.BLACK);
+                        barDataSet.setValueTextSize((0f));
+                        barChart.setNoDataText("Click here!");
+                        barChart.getDescription().setEnabled(false);
+
+                        Log.d("AAAAAAAA", String.valueOf(values_per_hour));
+                        if (values_per_hour.size() > 1) {
+                            barChart.setVisibility(View.VISIBLE);
+                        } else {
+                            barChart.setVisibility(View.INVISIBLE);
+                        }
+
+                    }
+                } else {
+                    Log.d("email", "Failed with: ", task.getException());
+                }
+            }
+        });
+    }
 
     public void clickToSearchDay(View view) {
         TreeMap<Integer, String> sorted = new TreeMap<Integer, String>();
         BarChart barChart = findViewById(R.id.barchart);
-        barChart.setVisibility(View.VISIBLE);
 
         Spinner mySpinner = findViewById(R.id.spinner_months);
         String month = mySpinner.getSelectedItem().toString();
@@ -184,15 +262,18 @@ public class HomeActivity extends AppCompatActivity {
                         barChart.setNoDataText("Click here!");
                         barChart.getDescription().setEnabled(false);
 
+                        if (values_per_day.size() > 1) {
+                            barChart.setVisibility(View.VISIBLE);
+                        } else {
+                            barChart.setVisibility(View.INVISIBLE);
+                        }
+
                     }
                 } else {
                     Log.d("email", "Failed with: ", task.getException());
                 }
             }
         });
-
-
-
     }
 
 
