@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mopus.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         emailText = findViewById(R.id.login_email);
-        passwordText = findViewById(R.id.login_password);
+        passwordText = findViewById(R.id.change_info_password);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();

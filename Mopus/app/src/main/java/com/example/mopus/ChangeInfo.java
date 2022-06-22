@@ -24,8 +24,15 @@ public class ChangeInfo extends AppCompatActivity {
         String from = getIntent().getExtras().getString("From");
         Log.d("check", from);
         EditText info = (EditText) findViewById(R.id.change_info_info);
+        EditText pass = (EditText) findViewById(R.id.change_info_password);
 
         switch (from) {
+            case "imc":
+                info.setHint("Height (cm)");
+                info.setInputType(InputType.TYPE_CLASS_NUMBER);
+                pass.setHint("Weight (kg)");
+                pass.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                break;
             case "first_name":
                 info.setHint("First Name");
                 break;

@@ -107,4 +107,12 @@ public class User {
 
         return user;
     }
+
+    public Map<String, Object> IMC_toDB() {
+        Map<String, Object> user = new HashMap<>();
+        user.put("weight", weight);
+        user.put("height", height);
+
+        return user;
+    }
 }
