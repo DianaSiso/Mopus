@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mopus.databinding.FragmentAnalysisBinding;
-import com.example.mopus.qrCodeScanner.CameraXLivePreviewActivity;
+import com.example.mopus.CameraXLivePreviewActivity;
 
 import org.jetbrains.annotations.NotNull;
 

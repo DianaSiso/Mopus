@@ -2,7 +2,6 @@ package com.example.mopus.ui.home_professional;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Region;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mopus.R;
 import com.example.mopus.databinding.FragmentHomeProfessionalBinding;
 import com.example.mopus.model.Scan;
-import com.example.mopus.qrCodeScanner.ResultActivity;
+import com.example.mopus.ResultActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -35,7 +33,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

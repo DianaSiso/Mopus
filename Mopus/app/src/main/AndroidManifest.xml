@@ -39,14 +39,14 @@
             android:name=".QrCodeActivity"
             android:exported="false" />
         <activity
-            android:name=".qrCodeScanner.ResultActivity"
+            android:name=".ResultActivity"
             android:exported="false" />
 
         <meta-data
             android:name="com.example.mopus.DEPENDENCIES"
             android:value="barcode" />
         <activity
-            android:name=".qrCodeScanner.CameraXLivePreviewActivity"
+            android:name=".CameraXLivePreviewActivity"
             android:exported="false" />
         <activity
             android:name=".qrCodeScanner.preference.SettingsActivity"
