@@ -24,6 +24,8 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -100,17 +102,20 @@ public class ResultActivity extends AppCompatActivity {
             //String hour = (String) mainObject.get( "hour" );
 
             getStats();
-            //text.setText(userEmail + " - " + day + " - " /*+ hour*/);
 
             isNewScan = mainObject.has("isNewScan");
+
+            if(isNewScan) {
+                saveNewScan();
+                isNewScan = false;
+            }
+
             Log.d(TAG, "NEW ACTIVITY");
 
         } catch (JSONException jsonException) {
             jsonException.printStackTrace();
             Toast.makeText(this, "Something went wrong \n", Toast.LENGTH_SHORT).show();
         }
-
-
 
     }
 
@@ -136,9 +141,6 @@ public class ResultActivity extends AppCompatActivity {
                                 userWeight.setVisibility(View.VISIBLE);
                                 userHeight.setVisibility(View.VISIBLE);
 
-                                if(isNewScan) {
-                                    saveNewScan();
-                                }
 
                             }
                         } else {
@@ -152,12 +154,26 @@ public class ResultActivity extends AppCompatActivity {
     private void saveNewScan() {
         Log.d(TAG, "NEW SCAN");
         Scan s = new Scan(String.valueOf(System.currentTimeMillis()), userEmail, date);
-        db.collection("professional_scans").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
-                //.update(s.toDB())
-                .set(s.toDB(), SetOptions.merge())
-                .addOnCompleteListener(task1 -> {
+        DocumentReference doc = db.collection("professional_scans").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
+        doc.set(s.toDB(), SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                        } else {
+                            Log.w(TAG, "Error writing document");
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                /*.addOnCompleteListener(task1 -> {
                     //progressBar.setVisibility(View.GONE);
-                    /*if(task1.isSuccessful()) {
+                    if(task1.isSuccessful()) {
                         Toast.makeText(this, "Successful scan", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(this, "USER TABLE " + task1.getException().getMessage(), Toast.LENGTH_LONG).show();
