@@ -59,6 +59,57 @@
                 android:layout_height="400dp"
                 android:visibility="invisible"></com.github.mikephil.charting.charts.BarChart>
 
+            <TextView
+                android:id="@+id/graph_water_per_hour_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/graph_water_per_hour" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner_hours_month"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp" />
+
+                <Spinner
+                    android:id="@+id/spinner_hours_day"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp" />
+
+                <Button
+                    android:id="@+id/button_search_graphs_hour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#FF9B9B"
+                    android:onClick="clickToSearchHours"
+                    android:text="@string/action_search" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barchart2"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:visibility="invisible"></com.github.mikephil.charting.charts.BarChart>
+
         </LinearLayout>
     </ScrollView>
 
