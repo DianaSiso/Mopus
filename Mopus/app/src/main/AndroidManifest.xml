@@ -36,9 +36,6 @@
         </service>
 
         <activity
-            android:name=".DrinkWater"
-            android:exported="false" />
-        <activity
             android:name=".QrCodeActivity"
             android:exported="false" />
         <activity
