@@ -88,15 +88,17 @@ public class HomeProfessionalFragment extends Fragment {
 
                 if (snapshot != null && snapshot.exists()) {
                     Log.d(TAG, "Current data: " + snapshot.getData());
-                    Map<String, Object> result = snapshot.getData();
-                    scans.clear();
-                    for(String scanKey : result.keySet()) {
-                        Map<String, Object> scan = (Map<String, Object>) result.get(scanKey);
-                        Scan s = new Scan(scanKey, String.valueOf(scan.get("user_email")), String.valueOf(scan.get("date")));
-                        if(!scans.contains(s)) {
-                            scans.add(s);
+                    if(snapshot.getData().size() > 0) {
+                        Map<String, Object> result = snapshot.getData();
+                        scans.clear();
+                            for(String scanKey : result.keySet()) {
+                                Map<String, Object> scan = (Map<String, Object>) result.get(scanKey);
+                                Scan s = new Scan(scanKey, String.valueOf(scan.get("user_email")), String.valueOf(scan.get("date")));
+                                if(!scans.contains(s)) {
+                                    scans.add(s);
+                                }
+                            }
                         }
-                    }
                     generateDataList(scans);
 
                 } else {

@@ -13,7 +13,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mopus.HomeActivity;
+import com.example.mopus.MainActivity;
+import com.example.mopus.ProfessionalActivity2;
 import com.example.mopus.R;
+import com.example.mopus.Register;
+import com.example.mopus.model.Scan;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -24,6 +29,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,11 +45,14 @@ public class ResultActivity extends AppCompatActivity {
 
     private static final String TAG = "ResultActivity";
 
-    //private TextView text;
     private String userEmail;
     private String date;
     private String monthScan;
     private String numberDay;
+    private boolean isNewScan;
+
+    private TextView userWeight;
+    private TextView userHeight;
 
     private FirebaseFirestore db;
 
@@ -49,6 +60,9 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
+        userWeight = findViewById(R.id.user_weight);
+        userHeight = findViewById(R.id.user_height);
 
         Spinner spinner_months= findViewById(R.id.spinner_months);
         ArrayAdapter<CharSequence> adapter_months=ArrayAdapter.createFromResource(this, R.array.months, android.R.layout.simple_spinner_item);
@@ -88,14 +102,15 @@ public class ResultActivity extends AppCompatActivity {
             getStats();
             //text.setText(userEmail + " - " + day + " - " /*+ hour*/);
 
-            if(mainObject.has("isNewScan")) {
-                // TODO: create Scan object and save it on the db BUT ONLY IF COMES FROM A NEW SCAN
-                Log.d(TAG, "NEW ACTIVITY");
-            }
+            isNewScan = mainObject.has("isNewScan");
+            Log.d(TAG, "NEW ACTIVITY");
+
         } catch (JSONException jsonException) {
             jsonException.printStackTrace();
             Toast.makeText(this, "Something went wrong \n", Toast.LENGTH_SHORT).show();
         }
+
+
 
     }
 
@@ -106,28 +121,48 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void getStats() {
-        db.collection("water")
-                .document(userEmail)
+        db.collection("users")
+                .whereEqualTo("email", userEmail)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                            } else {
-                                Log.d(TAG, "No such document");
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                userWeight.setText(userWeight.getText() + String.valueOf(document.getData().get("weight")) + " Kg");
+                                userHeight.setText(userHeight.getText() + String.valueOf(document.getData().get("height")) + " cm");
+
+                                userWeight.setVisibility(View.VISIBLE);
+                                userHeight.setVisibility(View.VISIBLE);
+
+                                if(isNewScan) {
+                                    saveNewScan();
+                                }
+
                             }
                         } else {
-                            Log.d(TAG, "get failed with ", task.getException());
+                            Log.w(TAG, "Error getting documents.", task.getException());
                         }
                     }
                 });
+
     }
 
-    private void createNewScan() {
-
+    private void saveNewScan() {
+        Log.d(TAG, "NEW SCAN");
+        Scan s = new Scan(String.valueOf(System.currentTimeMillis()), userEmail, date);
+        db.collection("professional_scans").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                //.update(s.toDB())
+                .set(s.toDB(), SetOptions.merge())
+                .addOnCompleteListener(task1 -> {
+                    //progressBar.setVisibility(View.GONE);
+                    /*if(task1.isSuccessful()) {
+                        Toast.makeText(this, "Successful scan", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(this, "USER TABLE " + task1.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    }*/
+                });
     }
 
     public void clickToSearchHours(View view) {
@@ -227,16 +262,15 @@ public class ResultActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d("Getting data from DB", "... Complete.");
                         HashMap<String, HashMap<String, Double>> spd = (HashMap<String, HashMap<String, Double>>) document.getData().get("stats_per_day");
 
                         for (String day : spd.keySet()) {
                             String[] days = day.split(" ");
-                            if (/*(day.contains(monthScan) && Integer.parseInt(days[1]) < Integer.parseInt(numberDay)) || */day.contains(month)) {
-                                // Log.d("DAY_DEBUG", day);
-                                // Log.d("DAY_NUMBER", day.replace(month + " ", ""));
-                                // Log.d("DAY_VALUE", String.valueOf(spd.get(day)));
-                                values_per_day.put( Integer.parseInt(day.replace(month + " ", "")), String.valueOf(spd.get(day)));
+                            Log.d("DAY_DEBUG", days[1] + " - " + numberDay + ": " + ((Integer.parseInt(days[1]) < Integer.parseInt(numberDay) & day.contains(monthScan)) ? "menor" : "maior"));
+                            if (day.contains(month)) {
+                                if((day.contains(monthScan) && Integer.parseInt(days[1]) < Integer.parseInt(numberDay)) || !day.contains(monthScan)) {
+                                    values_per_day.put( Integer.parseInt(day.replace(month + " ", "")), String.valueOf(spd.get(day)));
+                                }
                             }
                         }
 
@@ -268,7 +302,7 @@ public class ResultActivity extends AppCompatActivity {
                         barChart.setNoDataText("Click here!");
                         barChart.getDescription().setEnabled(false);
 
-                        if (values_per_day.size() > 1) {
+                        if (values_per_day.size() > 0) {
                             barChart.setVisibility(View.VISIBLE);
                         } else {
                             barChart.setVisibility(View.INVISIBLE);
