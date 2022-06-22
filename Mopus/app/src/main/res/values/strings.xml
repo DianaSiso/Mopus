@@ -211,4 +211,7 @@
     <string name="pref_key_segmentation_raw_size_mask" translatable="false">srsm</string>
     <string name="action_create_qr">Create QR code</string>
     <string name="qr_code">qr_code</string>
+    <string name="result_title">User Information</string>
+    <string name="weight">Weight: </string>
+    <string name="height">Height: </string>
 </resources>

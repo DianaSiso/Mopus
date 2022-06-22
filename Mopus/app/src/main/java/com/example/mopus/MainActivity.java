@@ -45,10 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        Log.d(TAG, "onStart");
-
         if(mAuth.getCurrentUser() != null) {
-            Log.d(TAG, "USER NOT NULL");
             db.collection("users")
                     .whereEqualTo("id", mAuth.getCurrentUser().getUid())
                     .get()

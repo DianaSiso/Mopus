@@ -29,6 +29,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +44,8 @@ public class HomeProfessionalFragment extends Fragment {
     private static final String TAG = "HOME_PROFESSIONAL_FRAGMENT";
 
     private FragmentHomeProfessionalBinding binding;
+
+    private ListenerRegistration registration;
 
     private ScansAdapter adapter;
     private RecyclerView recyclerView;
@@ -77,7 +80,7 @@ public class HomeProfessionalFragment extends Fragment {
         List<Scan> scans = new ArrayList<>();
 
         final DocumentReference docRef = db.collection("professional_scans").document(email);
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        registration = docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot,
                                 @Nullable FirebaseFirestoreException e) {
@@ -88,15 +91,17 @@ public class HomeProfessionalFragment extends Fragment {
 
                 if (snapshot != null && snapshot.exists()) {
                     Log.d(TAG, "Current data: " + snapshot.getData());
-                    Map<String, Object> result = snapshot.getData();
-                    scans.clear();
-                    for(String scanKey : result.keySet()) {
-                        Map<String, Object> scan = (Map<String, Object>) result.get(scanKey);
-                        Scan s = new Scan(scanKey, String.valueOf(scan.get("user_email")), String.valueOf(scan.get("date")));
-                        if(!scans.contains(s)) {
-                            scans.add(s);
+                    if(snapshot.getData().size() > 0) {
+                        Map<String, Object> result = snapshot.getData();
+                        scans.clear();
+                            for(String scanKey : result.keySet()) {
+                                Map<String, Object> scan = (Map<String, Object>) result.get(scanKey);
+                                Scan s = new Scan(scanKey, String.valueOf(scan.get("user_email")), String.valueOf(scan.get("date")));
+                                if(!scans.contains(s)) {
+                                    scans.add(s);
+                                }
+                            }
                         }
-                    }
                     generateDataList(scans);
 
                 } else {
@@ -104,12 +109,12 @@ public class HomeProfessionalFragment extends Fragment {
                 }
             }
         });
-        //return scans;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        registration.remove();
         binding = null;
     }
 
@@ -119,13 +124,6 @@ public class HomeProfessionalFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-    }
-
-    private void generateScansList() {
-        HashMap<String, Scan> scans = new HashMap<>();
-        //scans = homeProfessionalViewModel.getScans();
-        // TODO: get data from database
-
     }
 
     class ScansAdapter extends
